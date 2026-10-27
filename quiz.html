@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/*GLASS*/
+:root { --ok: #2fa35a; --bad: #e0453f; --ok-t: rgba(47,163,90,.14); --bad-t: rgba(224,69,63,.13); }
+.page { max-width: 860px; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; position: relative; }
+.kon-link { font-size: 13px; font-weight: 600; padding: 6px 13px; border-radius: 999px; text-decoration: none; color: #3478f6; background: var(--glass-strong); border: 1px solid var(--edge); }
+.rule-body ul, .rule-body ol { margin: 0 0 8px; padding-left: 20px; }
+.rule-body li { margin: 3px 0; }
+.meta-row span { font-size: 13px; font-weight: 500; padding: 6px 13px; border-radius: 999px; color: var(--muted); background: var(--glass-soft); border: 1px solid var(--edge); }
+
+/* progress */
+.progress { position: sticky; top: 12px; z-index: 5; margin-top: 18px; border-radius: 22px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; }
+.progress .bar { flex: 1; height: 8px; border-radius: 99px; background: var(--hair); overflow: hidden; }
+.progress .fill { height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #3478f6, #8a5cf0); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.progress .txt { font-size: 14px; font-weight: 600; white-space: nowrap; }
+.progress .txt small { color: var(--muted); font-weight: 500; }
+
+/* rule card */
+.rule { margin-top: 18px; border-radius: var(--r-l); padding: 0; overflow: hidden; }
+.rule summary { list-style: none; cursor: pointer; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 600; }
+.rule summary::-webkit-details-marker { display: none; }
+.rule summary .chev { color: var(--muted); transition: transform .25s; }
+.rule[open] summary .chev { transform: rotate(180deg); }
+.rule .rule-body { padding: 0 24px 20px; }
+.rule .rule-body p { margin: 0 0 8px; }
+.rule strong { background: var(--tint); padding: 1px 7px; border-radius: 7px; font-weight: 600; }
+
+.section-label { margin: 30px 6px 12px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--c); display: flex; align-items: center; gap: 8px; }
+
+/* question card */
+.q { border-radius: var(--r-l); padding: 22px 24px 20px; margin-bottom: 12px; background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  border: 1px solid var(--edge); box-shadow: var(--shadow), inset 0 1px 0 var(--edge); transition: border-color .3s, box-shadow .3s; }
+.q.ok { border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
+.q.bad { border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
+.q-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+.check {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; margin-top: 1px;
+  border: 1.5px solid var(--hair); background: var(--glass-soft); color: transparent; font-size: 16px; font-weight: 700; transition: all .3s cubic-bezier(.2,.8,.2,1);
+}
+.q.ok .check { background: var(--ok); border-color: var(--ok); color: #fff; transform: scale(1.05); }
+.q.bad .check { background: var(--bad-t); border-color: color-mix(in srgb, var(--bad) 50%, transparent); color: var(--bad); }
+.q-title { flex: 1; }
+.q-kind { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 3px; }
+.q-text { font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -.01em; }
+
+/* options */
+.opts { display: grid; gap: 8px; }
+.opt { position: relative; display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 14px; cursor: pointer; border: 1px solid var(--hair); background: var(--glass-soft); transition: background .2s, border-color .2s; }
+.opt:hover { background: var(--glass-strong); }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt .mark { flex: 0 0 auto; width: 20px; height: 20px; border: 1.5px solid var(--muted); display: grid; place-items: center; transition: all .2s; }
+.opt[data-type="radio"] .mark { border-radius: 50%; }
+.opt[data-type="checkbox"] .mark { border-radius: 6px; }
+.opt input:checked + .mark { border-color: #3478f6; background: #3478f6; box-shadow: inset 0 0 0 3px var(--glass-strong); }
+.opt[data-type="checkbox"] input:checked + .mark { box-shadow: none; }
+.opt[data-type="checkbox"] input:checked + .mark::after { content: "✓"; color: #fff; font-size: 13px; font-weight: 700; }
+.opt input:focus-visible + .mark { outline: 3px solid rgba(52,120,246,.35); outline-offset: 2px; }
+.opt.right { border-color: color-mix(in srgb, var(--ok) 55%, transparent); background: var(--ok-t); }
+.opt.wrong { border-color: color-mix(in srgb, var(--bad) 50%, transparent); background: var(--bad-t); }
+.opt.missed { border-style: dashed; border-color: color-mix(in srgb, var(--ok) 60%, transparent); }
+
+/* gaps and text */
+.sent { line-height: 2.3; font-size: 16px; }
+.sent + .sent { margin-top: 4px; }
+.gap, .ans, select.sel {
+  font: inherit; color: var(--ink); border: 1px solid var(--hair); background: var(--glass-strong); border-radius: 10px; padding: 5px 10px; transition: border-color .2s, box-shadow .2s;
+}
+.gap { min-width: 120px; width: 11ch; line-height: 1.3; padding: 4px 10px; vertical-align: baseline; }
+.q { scroll-margin-top: 90px; }
+.gap.w-l { width: 18ch; }
+.ans { width: 100%; padding: 11px 14px; border-radius: 14px; }
+.gap:focus, .ans:focus, select.sel:focus { outline: none; border-color: rgba(52,120,246,.6); box-shadow: 0 0 0 4px rgba(52,120,246,.15); }
+.gap.right, .ans.right, select.sel.right { border-color: var(--ok); background: var(--ok-t); }
+.gap.wrong, .ans.wrong, select.sel.wrong { border-color: var(--bad); background: var(--bad-t); }
+.bank { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.bank span { font-size: 13.5px; font-weight: 500; padding: 5px 11px; border-radius: 999px; background: var(--tint); color: var(--c); }
+.match { display: grid; gap: 8px; }
+.match-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 8px 8px 8px 14px; border-radius: 14px; background: var(--glass-soft); border: 1px solid var(--hair); }
+.match-row b { font-weight: 600; }
+select.sel { width: 100%; padding: 8px 10px; appearance: none; -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 30px; }
+
+.q-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+.btn { font: inherit; font-size: 14px; font-weight: 600; border-radius: 999px; padding: 9px 18px; cursor: pointer; border: 1px solid var(--edge); color: var(--ink);
+  background: var(--glass-strong); box-shadow: 0 2px 10px rgba(0,0,0,.06), inset 0 1px 0 var(--edge); transition: transform .2s cubic-bezier(.2,.8,.2,1); }
+.btn:hover { transform: scale(1.03); }
+.btn.primary { background: #1c1c1e; color: #fff; border-color: #1c1c1e; }
+:root[data-theme="dark"] .btn.primary { background: #f5f5f7; color: #1c1c1e; border-color: #f5f5f7; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { background: #f5f5f7; color: #1c1c1e; border-color: #f5f5f7; } }
+.btn.ghost { background: transparent; box-shadow: none; border-color: var(--hair); color: var(--muted); }
+.feedback { display: none; margin-top: 12px; padding: 12px 14px; border-radius: 14px; font-size: 14.5px; line-height: 1.5; }
+.q.ok .feedback { display: block; background: var(--ok-t); }
+.q.bad .feedback { display: block; background: var(--bad-t); }
+.feedback b { font-weight: 600; }
+
+/* result */
+.result { display: none; margin-top: 22px; border-radius: var(--r-xl); padding: 30px; text-align: center; }
+.result.show { display: block; }
+.result .big { font-size: 52px; font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+.result p { color: var(--muted); margin: 10px 0 0; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; }
+@media (max-width: 640px) {
+  .q { padding: 18px 16px; border-radius: 22px; }
+  .q-text { font-size: 16px; }
+  .match-row { grid-template-columns: minmax(0, 1fr); }
+  .gap { min-width: 100px; }
+  .progress { top: 8px; padding: 12px 14px; }
+}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
+<div class="page">
+  <header class="hero">
+    <div class="hero-top"><button class="theme-btn" id="themeBtn" type="button" aria-label="Сменить тему"><span class="ti-light">☀︎</span><span class="ti-dark">☾</span>Тема</button>
+      <div class="hero-badges"><span>{{BADGE}}</span><span>{{DATE}}</span><span>≈ 10 минут</span></div></div>
+    <h1>{{H1}}</h1>
+    <p>{{HERO_P}}</p>
+    <div class="meta-row"><span id="qCount"></span><span>Ответ проверяется сразу</span><span>Прогресс сохраняется</span><a class="kon-link" href="../index.html">Открыть конспект →</a></div>
+  </header>
+
+  <div class="progress glassy"><div class="bar"><div class="fill" id="fill"></div></div><div class="txt" id="ptxt"></div></div>
+
+  <details class="rule glassy" data-g="{{RULE_G}}">
+    <summary><span>Подсказка: правило из конспекта</span><span class="chev">▾</span></summary>
+    <div class="rule-body">{{RULE}}</div>
+  </details>
+
+  <div id="quiz"></div>
+
+  <section class="result glassy" id="result">
+    <div class="big" id="score"></div>
+    <p id="verdict"></p>
+    <div class="actions"><button class="btn" id="showWrong">Показать ошибки</button><button class="btn ghost" id="reset">Пройти заново</button></div>
+  </section>
+</div>
+
+<script>
+var QUESTIONS = {{QUESTIONS}};
+</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  function st(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var th = st('theme'); if (th) root.setAttribute('data-theme', th);
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', next); st('theme', next);
+  });
+
+  var KEY = '{{KEY}}';
+  var state = {}; try { state = JSON.parse(st(KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function save() { st(KEY, JSON.stringify(state)); }
+  function norm(s) { return (s || '').toLowerCase().replace(/[’‘`]/g, "'").replace(/[.!?]+$/g, '').replace(/\s+/g, ' ').trim(); }
+  function shuffleIdx(n, seed) { var a = []; for (var i = 0; i < n; i++) a.push(i); var x = seed; for (var j = n - 1; j > 0; j--) { x = (x * 9301 + 49297) % 233280; var k = Math.floor(x / 233280 * (j + 1)); var t = a[j]; a[j] = a[k]; a[k] = t; } return a; }
+
+  var quiz = document.getElementById('quiz'), qs = QUESTIONS.filter(function (q) { return q.id; });
+  var group = 0, num = 0;
+  document.getElementById('qCount').textContent = qs.length + ' заданий';
+
+  QUESTIONS.forEach(function (q) {
+    if (q.sec) { group = q.g; var l = document.createElement('div'); l.className = 'section-label'; l.setAttribute('data-g', group); l.innerHTML = '<span class="dot"></span>' + q.sec; quiz.appendChild(l); return; }
+    num++;
+    var el = document.createElement('section'); el.className = 'q'; el.id = q.id; el.setAttribute('data-g', group);
+    var h = '<div class="q-head"><div class="check" aria-hidden="true">✓</div><div class="q-title"><span class="q-kind">' + num + '. ' + q.kind + '</span>';
+    if (q.type !== 'gap') h += '<div class="q-text">' + q.text + '</div>';
+    h += '</div></div>';
+    if (q.type === 'radio' || q.type === 'multi') {
+      var t = q.type === 'radio' ? 'radio' : 'checkbox';
+      h += '<div class="opts">' + q.options.map(function (o, i) {
+        return '<label class="opt" data-type="' + t + '" data-i="' + i + '"><input type="' + t + '" name="' + q.id + '" value="' + i + '"><span class="mark"></span><span>' + o + '</span></label>';
+      }).join('') + '</div>';
+    } else if (q.type === 'gap') {
+      h += '<div class="bank">' + q.bank.map(function (b) { return '<span>' + b + '</span>'; }).join('') + '</div>';
+      h += q.parts.map(function (p, i) {
+        var wide = p[1][0].length > 10 ? ' w-l' : '';
+        return '<div class="sent">' + p[0] + '<input class="gap' + wide + '" data-i="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="пропуск ' + (i + 1) + '">' + p[2] + '</div>';
+      }).join('');
+    } else if (q.type === 'text') {
+      h += '<input class="ans" autocomplete="off" spellcheck="false" placeholder="Ваш ответ">';
+    } else if (q.type === 'match') {
+      var order = shuffleIdx(q.pairs.length, 7);
+      h += '<div class="match">' + q.pairs.map(function (p, i) {
+        return '<div class="match-row"><b>' + p[0] + '</b><select class="sel" data-i="' + i + '"><option value="">— выберите —</option>' +
+          order.map(function (j) { return '<option value="' + j + '">' + q.pairs[j][1] + '</option>'; }).join('') + '</select></div>';
+      }).join('') + '</div>';
+    }
+    h += '<div class="q-foot"><button class="btn primary chk">Проверить</button><button class="btn ghost rst">Сбросить</button></div><div class="feedback"></div>';
+    el.innerHTML = h; quiz.appendChild(el);
+    el.querySelector('.chk').addEventListener('click', function () { check(q, el, true); });
+    el.querySelector('.rst').addEventListener('click', function () { clear(q, el); delete state[q.id]; save(); progress(); });
+    restore(q, el);
+  });
+
+  function collect(q, el) {
+    if (q.type === 'radio') { var c = el.querySelector('input:checked'); return c ? +c.value : null; }
+    if (q.type === 'multi') return [].map.call(el.querySelectorAll('input:checked'), function (c) { return +c.value; });
+    if (q.type === 'gap') return [].map.call(el.querySelectorAll('.gap'), function (g) { return g.value; });
+    if (q.type === 'text') return el.querySelector('.ans').value;
+    if (q.type === 'match') return [].map.call(el.querySelectorAll('.sel'), function (s) { return s.value; });
+  }
+  function restore(q, el) {
+    var s = state[q.id]; if (!s) return;
+    var v = s.v;
+    if (q.type === 'radio' && v !== null) { var r = el.querySelector('input[value="' + v + '"]'); if (r) r.checked = true; }
+    if (q.type === 'multi') v.forEach(function (i) { var c = el.querySelector('input[value="' + i + '"]'); if (c) c.checked = true; });
+    if (q.type === 'gap') el.querySelectorAll('.gap').forEach(function (g, i) { g.value = v[i] || ''; });
+    if (q.type === 'text') el.querySelector('.ans').value = v || '';
+    if (q.type === 'match') el.querySelectorAll('.sel').forEach(function (sl, i) { sl.value = v[i] || ''; });
+    if (s.checked) check(q, el, false);
+  }
+  function clear(q, el) {
+    el.classList.remove('ok', 'bad');
+    el.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(function (i) { i.checked = false; });
+    el.querySelectorAll('.gap,.ans').forEach(function (i) { i.value = ''; });
+    el.querySelectorAll('.sel').forEach(function (s) { s.value = ''; });
+    el.querySelectorAll('.right,.wrong,.missed').forEach(function (x) { x.classList.remove('right', 'wrong', 'missed'); });
+  }
+  function check(q, el, user) {
+    var v = collect(q, el), ok = false;
+    el.querySelectorAll('.right,.wrong,.missed').forEach(function (x) { x.classList.remove('right', 'wrong', 'missed'); });
+    if (q.type === 'radio') {
+      ok = v === q.answer;
+      el.querySelectorAll('.opt').forEach(function (o) { var i = +o.getAttribute('data-i'); if (i === q.answer && v !== null) o.classList.add(ok ? 'right' : 'missed'); if (i === v && !ok) o.classList.add('wrong'); });
+    } else if (q.type === 'multi') {
+      ok = v.length === q.answer.length && q.answer.every(function (a) { return v.indexOf(a) > -1; });
+      el.querySelectorAll('.opt').forEach(function (o) { var i = +o.getAttribute('data-i'), sel = v.indexOf(i) > -1, need = q.answer.indexOf(i) > -1;
+        if (sel && need) o.classList.add('right'); else if (sel) o.classList.add('wrong'); else if (need) o.classList.add('missed'); });
+    } else if (q.type === 'gap') {
+      ok = true;
+      el.querySelectorAll('.gap').forEach(function (g, i) { var good = q.parts[i][1].some(function (a) { return norm(a) === norm(g.value); }); g.classList.add(good ? 'right' : 'wrong'); if (!good) ok = false; });
+    } else if (q.type === 'text') {
+      var a = norm(v), inp = el.querySelector('.ans');
+      if (q.free) { var n = 0; ok = norm(v).indexOf('in case') > -1 && q.need.slice(1).some(function (x) { return a.indexOf(x) > -1; }); }
+      else ok = q.accept.some(function (x) { return norm(x) === a; });
+      inp.classList.add(ok ? 'right' : 'wrong');
+    } else if (q.type === 'match') {
+      ok = true;
+      el.querySelectorAll('.sel').forEach(function (s, i) { var good = s.value !== '' && +s.value === i; s.classList.add(good ? 'right' : 'wrong'); if (!good) ok = false; });
+    }
+    el.classList.toggle('ok', ok); el.classList.toggle('bad', !ok);
+    var fb = el.querySelector('.feedback');
+    var right = '';
+    if (!ok) {
+      if (q.type === 'gap') right = 'Правильно: ' + q.parts.map(function (p) { return p[1][0]; }).join(' · ') + '<br>';
+      if (q.type === 'match') right = 'Правильно: ' + q.pairs.map(function (p) { return p[0] + ' — ' + p[1]; }).join('; ') + '<br>';
+      if (q.type === 'text' && !q.free) right = '';
+    }
+    fb.innerHTML = (ok ? '<b>Верно!</b> ' : '<b>Не совсем.</b> ') + right + q.explain;
+    state[q.id] = { v: v, checked: true, ok: ok }; if (user) save();
+    progress();
+  }
+  function progress() {
+    var done = 0, good = 0;
+    qs.forEach(function (q) { var s = state[q.id]; if (s && s.checked) { done++; if (s.ok) good++; } });
+    document.getElementById('fill').style.width = (good / qs.length * 100) + '%';
+    document.getElementById('ptxt').innerHTML = good + ' / ' + qs.length + ' <small>верно</small>';
+    var res = document.getElementById('result');
+    if (done === qs.length) {
+      res.classList.add('show');
+      document.getElementById('score').textContent = good + ' / ' + qs.length;
+      var p = good / qs.length;
+      document.getElementById('verdict').textContent = p === 1 ? 'Идеально! Тема и слова закреплены.' : p >= .75 ? 'Отлично! Повторите задания с ошибками.' : p >= .5 ? 'Неплохо, но стоит вернуться к правилу и словам.' : 'Стоит ещё раз прочитать тему {{TOPIC_NUM}} в конспекте и повторить слова.';
+    } else res.classList.remove('show');
+  }
+  document.getElementById('showWrong').addEventListener('click', function () {
+    var first = document.querySelector('.q.bad'); if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    QUESTIONS.forEach(function (q) { if (q.id) clear(q, document.getElementById(q.id)); });
+    state = {}; save(); progress(); scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  progress();
+})();
+</script>
+</body>
+</html>

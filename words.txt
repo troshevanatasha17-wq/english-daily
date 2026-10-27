@@ -1,0 +1,306 @@
+# tag: n = из заметки, t = перевод с доски, B2/C1/C2 = уровень
+@0 Сериалы, кино и музыка
+binge-watch | смотреть сериал запоем, много серий подряд | B2
+many episodes in a row / in one sitting | много серий подряд, за один присест | B2
+lead to | может привести к | n
+encourage lack of activity | способствует отсутствию активности | n
+the third season came out | вышел третий сезон | n
+build suspense | нагнетать напряжение | n
+suspense | напряжение | t
+it's easy to follow | легко воспринимается, легко понять | n
+plot | сюжет | n
+viewer | зритель | n
+the audience | зрители | n
+slow-paced / fast-paced | медленный / быстрый по темпу | n
+season finale /fɪˈnɑː.li/ | финал сезона | n
+hate-watch | смотреть, чтобы поругать | n
+benefits of binge-watching | плюсы, выгоды | n
+cause psychological problems | вызывать психологические проблемы | n
+emotional roller-coaster | эмоциональные американские горки | B2
+mood swings | перепады настроения | B2
+get cancelled | его отменили | t
+goes downhill | становится хуже | B2
+big reveal | главное раскрытие | t
+build-up | интрига, нагнетание | t
+live up to fans' expectations | оправдать ожидания фанатов | B2
+twist ending | неожиданная развязка | B2
+spoil the finale | заспойлерить финал | B2
+die-hard fan | преданный фанат | B2
+earworm | навязчивая мелодия, песня, которая застряла в голове | C1
+it lives in my head rent-free | никак не выходит из головы | C1
+this music takes me back | эта музыка возвращает меня в прошлое | B2
+that was a bummer | это был облом | t
+that's a rip-off | это грабёж, обдираловка | B2
+had a blast | отлично провели время | t
+lyrics | текст песни | t
+sing along | подпевать | B2
+my go-to song | моя любимая песня, на все случаи | B2
+orchestra / choir /kwaɪə/ | оркестр / хор | B2
+based on true events | основано на реальных событиях | B2
+biased | предвзятый, однобокий | B2
+manipulative | манипулятивный | B2
+@1 Привычки, сон и повседневная жизнь
+get used to | привыкнуть | t
+be used to | быть привыкшим | t
+me neither | я тоже нет | t
+nightmare | кошмар | B2
+vague / vividly | смутный / ярко, отчётливо | B2
+insomnia | бессонница | B2
+increase the risk of | повышать риск | B2
+my anxiety doesn't let me sleep | тревога не даёт мне уснуть | B2
+miss out on (smth) | что-то упускать | t
+student dorm | общежитие | B2
+small things pile up | мелочи накапливаются | B2
+rural area | сельская местность | B2
+flexible schedule / work different shifts | гибкий график / работать в разные смены | B2
+give up smoking | бросить курить | B2
+withdrawal symptoms | синдром отмены, ломка | C1
+break a habit | избавиться от привычки | B2
+get rid of | избавиться от | B2
+addiction | зависимость | B2
+hoarding | патологическое накопительство | C1
+gambling / a gambler | азартные игры / игрок | B2
+make bets / chase losses | делать ставки / отыгрываться | C1
+be hungover | быть с похмелья | B2
+put off | откладывать | t
+keep on | продолжать | t
+can't resist | не могу устоять | t
+take up | заняться чем-то новым | t
+stick to | придерживаться, продолжать | t
+manage | справиться | t
+make an effort | приложить усилие | B2
+have a green thumb | уметь выращивать растения | C1
+I'm not getting any younger | я не молодею | C1
+live your life to the fullest | жить на полную | B2
+it's a torture | это пытка | B2
+spread myself too thin | браться за слишком многое сразу | C1
+kill two birds with one stone | убить двух зайцев одним выстрелом | B2
+it's a win-win | выигрыш для обеих сторон | B2
+burden | ноша, бремя | t
+@2 Характер, эмоции и отношения
+I can't put myself in their shoes | я не могу поставить себя на их место | n
+it's a double-edged sword | это палка о двух концах | n
+a reasonable person | здравомыслящий человек | n
+it's a win! | это победа! | n
+people-pleaser | человек, который старается всем угодить | n
+put up with | смириться, потерпеть | t
+put other people's needs first | ставить чужие потребности на первое место | B2
+take advantage of | пользоваться, злоупотреблять | B2
+take smb for granted | воспринимать как должное | B2
+set your own boundaries | устанавливать личные границы | B2
+doormat | тряпка | t
+wimp | слабак | C1
+stand your ground | стоять на своём | C1
+put yourself first | ставить себя на первое место | B2
+make peace with | смириться | t
+vulnerable | уязвимый | t
+superficial | поверхностный | C1
+no strings attached | без обязательств | C1
+feel left out | чувствовать себя лишним | t
+you don't belong here | тебе здесь не место | t
+show off / brag | хвастаться | B2
+humblebrag | хвастаться под видом скромности | C1
+humble = modest | скромный | t
+downplay her problems | преуменьшать её проблемы | C1
+exaggeration | преувеличение | B2
+traitor | предатель | t
+hypocrite / hypocrisy / hypocritical | лицемер / лицемерие / лицемерный | t
+lose my temper | выхожу из себя | t
+persistent | настойчивая | t
+determined | полна решимости | t
+throw tantrums | устраивает истерики | t
+have a short fuse | быть вспыльчивым | C1
+grumpy | ворчливый | B2
+mediocre / mid | посредственный | C1
+sophisticated | утончённый, сложный | B2
+dismissive | пренебрежительный | C1
+lack self-awareness | не осознавать себя, своих недостатков | C1
+take accountability for | брать ответственность за | C1
+it's justified | оправдано | t
+deep down / deep inside | в глубине души | B2
+I can relate | мне это знакомо | B2
+on purpose = intentionally | нарочно, намеренно | B2
+click with smb | сразу найти общий язык | B2
+have a beef with smb | быть в контрах с кем-то | C1
+be on good terms with | быть в хороших отношениях | B2
+get along with | ладить | B2
+walk on eggshells | ходить на цыпочках, бояться задеть | C1
+hurt smb's feelings | задеть чьи-то чувства | B2
+break up / dump | расстаться / бросить | B2
+sibling rivalry | соперничество между братьями и сёстрами | C1
+sympathize with | сочувствовать | B2
+fragile ego | хрупкое эго | C1
+gluttony | обжорство | C1
+greed | жадность | t
+pride | гордыня | B2
+wrath | ярость | t
+envy | зависть | t
+lust | похоть | t
+sloth | лень | t
+vengeful / revengeful | мстительный | C1
+@3 Раздражение, критика и конфликты
+pet peeve | то, что особенно раздражает | C1
+it drives me crazy | это сводит меня с ума | B2
+it gets on my nerves | это действует мне на нервы | B2
+it bugs me | это меня бесит | B2
+I can't tolerate it | я этого не выношу | B2
+rant | гневная тирада | t
+lame excuse | жалкая отговорка | t
+unacceptable | неприемлемо | B2
+it was the last straw | это была последняя капля | B2
+it was a dealbreaker for me | для меня это стало решающим «нет» | C1
+cut me some slack | будь ко мне снисходительнее | C1
+snap at | накричать, огрызнуться | t
+insult | оскорблять; оскорбление (ударение: inSULT / INsult) | t
+call smb out on | призывать к ответу за | t
+get off your high horse | перестань строить из себя | C1
+virtue signaling | показная добродетель | C1
+be lectured / be scolded | выслушивать нотации / получить выговор | B2
+undermine smb's confidence | подрывать чью-то уверенность | C1
+get a taste of your own medicine | получить по заслугам, тем же способом | C1
+shoulda woulda coulda | что было бы, если бы… (сожаление задним числом) | C1
+I won't deny it | не буду отрицать | B2
+missed opportunity | упущенная возможность | B2
+@4 Работа, учёба и продуктивность
+side hustle | подработка, дополнительный доход | C1
+gig work | разовая работа, фриланс | B2
+temporary / permanent contract | временный / постоянный договор | B2
+employment benefits | соцпакет | B2
+health insurance / sick leave | медстраховка / больничный | B2
+be on (sick) leave | быть на больничном | t
+maternity / paternity leave | декрет | B2
+resign / quit / leave | уволиться | t
+hand in your notice | подать заявление об уходе | C1
+be fired / be let go | быть уволенным | B2
+get written up | получить выговор (письменный) | C1
+it's above my pay grade | это не моего уровня решение | C1
+slacker / slack off | лентяй / отлынивать | C1
+underpaid / understaffed | низкооплачиваемый / с нехваткой персонала | C1
+the right fit | подходящий кандидат | B2
+beneficial / profitable | полезный / прибыльный | B2
+highlight | подчеркнуть, выделить | B2
+assess / assessment | оценивать / оценка | t
+evaluate | оценить | t
+areas of improvement / growth points | зоны роста | B2
+stick and carrot approach | метод кнута и пряника | C1
+it's a game-changer | это меняет правила игры | C1
+the best of both worlds | лучшее из двух вариантов | C1
+make a deal | заключить сделку | t
+come to an agreement | прийти к соглашению | B2
+fall behind schedule | отставать от графика | t
+meet a deadline | уложиться в срок | t
+get difficult tasks out of the way | разобраться с трудными задачами | t
+get a lot done | многое успевать | t
+avoid distractions | избегать отвлекающих факторов | t
+keep to a routine | соблюдать распорядок | t
+break down a task | разбить задачу на части | B2
+get sidetracked | отвлечься от темы | C1
+dumb it down | объяснить попроще | C1
+elaborate on | подробнее рассказать о | C1
+cause inconvenience | доставлять неудобства | B2
+encourage | воодушевить | t
+praise | хвалить | t
+review | повторять | t
+commute / commuter | ездить на работу / тот, кто ездит на работу | B2
+substitute teacher | замещающий учитель | B2
+@5 Деньги, покупки и вещи
+possessions | имущество, вещи | B2
+get attached to things | привязываться к вещам | B2
+memorabilia / keepsakes | памятные вещи | C1
+family relic / inherited | семейная реликвия / унаследованный | B2
+genuine /ˈdʒenjuɪn/ | подлинный | B2
+worn out | износились | t
+came back in style | снова вошло в моду | B2
+ancestors | предки | t
+durable | долговечный | t
+inheritance | наследство | B2
+less is more | меньше значит лучше | B2
+clutter / declutter | хлам / расхламлять | B2
+disposable / reusable | одноразовый / многоразовый | B2
+consumerism | общество потребления | C1
+value for money | соотношение цены и качества | B2
+it was a bargain / it's a steal | это была выгодная покупка / даром отдают | B2
+refund / fare / donation | возврат денег / плата за проезд / пожертвование | B2
+the offer is limited | предложение ограничено | B2
+marketing tricks | маркетинговые уловки | B2
+trick smb into buying | обманом заставить купить | C1
+entitled | считающий, что ему все должны | C1
+sign me up! | запиши меня | t
+I'm sold | вы меня убедили | t
+gym membership | абонемент в спортзал | B2
+get a mortgage / get a loan | взять ипотеку / кредит | B2
+pay in installments | платить в рассрочку | B2
+pay off debts | выплатить долги | B2
+savings | сбережения | B2
+afford | позволить себе | B2
+stocks | акции | B2
+lavish | роскошный | C1
+potluck | вечеринка, где каждый приносит блюдо | C1
+@6 Обман, новости и общество
+deceive | обманывать | t
+doubt | сомневаться | t
+come clean | признаться во всём | t
+live a lie | жить во лжи | t
+fall for | повестись | t
+get away with it | остаться безнаказанной | t
+pull it off | провернуть | t
+to convince | убедить | t
+pretend | притворяться | B2
+make up | выдумать | B2
+scheme | схема, махинация | B2
+hoax | розыгрыш, мистификация | C1
+scam / scammer / fraudster | мошенничество / мошенник | B2
+fraud scheme | мошенническая схема | C1
+commit a crime | совершить преступление | B2
+freed of all charges | сняли все обвинения | C1
+go viral | стать вирусным | B2
+backlash | волна критики | C1
+conspiracy theory | теория заговора | C1
+under the influence / make an impact on | под влиянием / повлиять на | B2
+woke agenda | повестка | t
+it's rigged | всё куплено | t
+take over the power | захватить власть | B2
+go down the rabbit hole | залипнуть, уйти с головой | C1
+mind your own business | заниматься своими делами | B2
+get rusty | потерять навык | C1
+apparently | судя по всему | B2
+dog-eat-dog world | жестокий, беспощадный мир | t
+sweatshop | потогонное производство | C1
+slaughterhouse | скотобойня | t
+cut out | исключать | t
+beliefs | убеждения | t
+judge by | судить по | t
+@7 Связки и разговорные выражения
+due to + noun | по причине | n
+due to the fact that | из-за того, что | n
+in the end | в конце концов | t
+from what he says | судя по тому, что он говорит | t
+all in all | в целом | t
+the only thing is that… | единственное… | t
+it all comes down to… | всё сводится к… | t
+long story short | короче говоря | t
+taking everything into account | учитывая всё | t
+according to | согласно, по словам | B2
+end up | в итоге, в результате, оказалось | t
+despite the fact that | несмотря на то что | B2
+give or take | плюс-минус | C1
+Go figure! | вот и думай | t
+Who am I kidding? | кого я обманываю? | t
+I bet | я уверена | B2
+thanks for the heads-up | спасибо, что предупредил | C1
+to break the ice | растопить лёд | B2
+be engaged in the conversation | быть вовлечённым в разговор | B2
+party animal / homebody | тусовщик / домосед | B2
+not to brag, but… | не хвастаюсь, но… | C1
+suit yourself | как хочешь, дело твоё | C1
+the time will tell | время покажет | B2
+the tables have turned | всё поменялось местами | C1
+pick your poison | выбирай меньшее из зол | C1
+it was meant to be | так было суждено | B2
+eat away at my conscience | грызёт совесть | C1
+scratch that | забудь, что я сказала | C1
+first come, first served | кто первый пришёл, того и обслужили | B2
+it's inevitable | это неизбежно | B2
+fulfilling | приносящий удовлетворение | C1
+a farewell party / a send-off party | прощальная вечеринка | B2
+aka (also known as) | также известный как | B2

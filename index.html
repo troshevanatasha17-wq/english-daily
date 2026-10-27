@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Английский: грамматика и словарь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1c1c1e;
+  --muted: rgba(60, 60, 67, .68);
+  --hair: rgba(60, 60, 67, .14);
+  --glass: rgba(255, 255, 255, .52);
+  --glass-strong: rgba(255, 255, 255, .72);
+  --glass-soft: rgba(255, 255, 255, .38);
+  --edge: rgba(255, 255, 255, .75);
+  --edge-2: rgba(255, 255, 255, .25);
+  --shadow: 0 1px 1px rgba(0,0,0,.03), 0 8px 32px rgba(31, 38, 80, .10);
+  --bg-base: #eef1f7;
+  --blob-1: #b9cdfa; --blob-2: #f3c6dd; --blob-3: #c5ecdf; --blob-4: #e3d5fb;
+  --r-xl: 34px; --r-l: 26px; --r-m: 18px;
+  --blur: blur(28px) saturate(180%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #f5f5f7; --muted: rgba(235, 235, 245, .62); --hair: rgba(235, 235, 245, .12);
+    --glass: rgba(44, 44, 52, .48); --glass-strong: rgba(58, 58, 68, .66); --glass-soft: rgba(255, 255, 255, .06);
+    --edge: rgba(255, 255, 255, .16); --edge-2: rgba(255, 255, 255, .04);
+    --shadow: 0 8px 32px rgba(0, 0, 0, .35);
+    --bg-base: #0d0e14; --blob-1: #23336b; --blob-2: #4a2346; --blob-3: #163f3a; --blob-4: #33275e;
+  }
+}
+:root[data-theme="dark"] {
+  --ink: #f5f5f7; --muted: rgba(235, 235, 245, .62); --hair: rgba(235, 235, 245, .12);
+  --glass: rgba(44, 44, 52, .48); --glass-strong: rgba(58, 58, 68, .66); --glass-soft: rgba(255, 255, 255, .06);
+  --edge: rgba(255, 255, 255, .16); --edge-2: rgba(255, 255, 255, .04);
+  --shadow: 0 8px 32px rgba(0, 0, 0, .35);
+  --bg-base: #0d0e14; --blob-1: #23336b; --blob-2: #4a2346; --blob-3: #163f3a; --blob-4: #33275e;
+}
+
+/* calm accent tints (Apple-like system hues, used sparingly) */
+[data-g="0"] { --c: #3478f6; }
+[data-g="1"] { --c: #2fa35a; }
+[data-g="2"] { --c: #8a5cf0; }
+[data-g="3"] { --c: #e6772e; }
+[data-g="4"] { --c: #e0457b; }
+[data-g="5"] { --c: #b8860b; }
+[data-g="6"] { --c: #1f9b98; }
+[data-g="7"] { --c: #5b5bd6; }
+[data-g] { --tint: color-mix(in srgb, var(--c) 13%, transparent); --tint-2: color-mix(in srgb, var(--c) 22%, transparent); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body {
+  margin: 0; color: var(--ink); background: var(--bg-base);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; letter-spacing: -.005em;
+}
+a { color: inherit; }
+
+/* living background */
+.backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.backdrop span { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .9; }
+.backdrop .b1 { width: 55vw; height: 55vw; left: -12vw; top: -14vw; background: var(--blob-1); }
+.backdrop .b2 { width: 45vw; height: 45vw; right: -10vw; top: 10vh; background: var(--blob-2); }
+.backdrop .b3 { width: 50vw; height: 50vw; left: 20vw; bottom: -22vw; background: var(--blob-3); }
+.backdrop .b4 { width: 32vw; height: 32vw; right: 12vw; bottom: 8vh; background: var(--blob-4); }
+
+/* glass primitive */
+.glassy, .hero, aside, .group-banner, .topic, .words {
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  border: 1px solid var(--edge);
+  box-shadow: var(--shadow), inset 0 1px 0 var(--edge), inset 0 -1px 0 var(--edge-2);
+}
+
+.page { max-width: 1240px; margin: 0 auto; padding: 18px 18px 80px; }
+
+/* hero */
+.hero { position: relative; border-radius: var(--r-xl); padding: 40px 44px 34px; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 38%); mix-blend-mode: soft-light; }
+.hero-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 22px; position: relative; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-badges span { font-size: 13px; font-weight: 500; padding: 6px 13px; border-radius: 999px; color: var(--muted); background: var(--glass-soft); border: 1px solid var(--edge); }
+.hero h1 { position: relative; font-size: clamp(32px, 4.6vw, 54px); line-height: 1.05; letter-spacing: -.035em; font-weight: 700; margin: 0 0 12px; max-width: 20ch; }
+.hero p { position: relative; font-size: 16px; max-width: 64ch; margin: 0; color: var(--muted); }
+.theme-btn {
+  display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 7px 15px 7px 11px; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer;
+  background: var(--glass-strong); border: 1px solid var(--edge); box-shadow: 0 2px 10px rgba(0,0,0,.06), inset 0 1px 0 var(--edge);
+  transition: transform .2s cubic-bezier(.2,.8,.2,1);
+}
+.theme-btn:hover { transform: scale(1.03); }
+.theme-btn .ti-dark { display: none; }
+:root[data-theme="dark"] .theme-btn .ti-light { display: none; } :root[data-theme="dark"] .theme-btn .ti-dark { display: inline; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .theme-btn .ti-light { display: none; } :root:not([data-theme]) .theme-btn .ti-dark { display: inline; } }
+
+/* segmented control */
+.tabs { position: relative; display: inline-flex; gap: 2px; margin-top: 26px; padding: 4px; border-radius: 999px; background: var(--glass-soft); border: 1px solid var(--edge); box-shadow: inset 0 1px 2px rgba(0,0,0,.05); }
+.tab { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; padding: 9px 20px; font: inherit; font-size: 15px; font-weight: 600; color: var(--muted); background: transparent; cursor: pointer; transition: all .25s cubic-bezier(.2,.8,.2,1); }
+.tab .tab-n { font-size: 12px; font-weight: 600; color: var(--muted); }
+.tab.on { color: var(--ink); background: var(--glass-strong); box-shadow: 0 3px 12px rgba(0,0,0,.10), inset 0 1px 0 var(--edge); }
+
+.glass { position: relative; margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; max-width: 860px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 15px; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: 14.5px;
+  background: var(--glass-strong); border: 1px solid var(--edge); box-shadow: 0 1px 6px rgba(0,0,0,.05), inset 0 1px 0 var(--edge);
+  transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+}
+.chip:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 6px 18px rgba(0,0,0,.08), inset 0 1px 0 var(--edge); }
+.chip-n { font-size: 12px; color: var(--muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; background: var(--c); box-shadow: 0 0 0 3px var(--tint); }
+
+.view { display: none; }
+body[data-view="grammar"] .view-grammar, body[data-view="dict"] .view-dict { display: block; }
+.glass-grammar, .glass-dict { display: none; }
+body[data-view="grammar"] .glass-grammar, body[data-view="dict"] .glass-dict { display: flex; }
+
+/* layout + sidebar */
+.layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 22px; margin-top: 22px; }
+aside { position: sticky; top: 18px; align-self: start; max-height: calc(100vh - 36px); display: flex; flex-direction: column; border-radius: var(--r-l); padding: 18px 12px 12px; }
+.panel { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+.aside-title { font-weight: 700; font-size: 17px; margin: 0 8px 12px; letter-spacing: -.02em; }
+.search { flex: 0 0 auto; width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--hair); background: var(--glass-soft); color: var(--ink); font: inherit; font-size: 14px; margin-bottom: 12px; }
+.search::placeholder { color: var(--muted); }
+.search:focus { outline: none; border-color: color-mix(in srgb, #3478f6 50%, transparent); box-shadow: 0 0 0 4px rgba(52,120,246,.15); }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; flex: 0 0 auto; }
+.filter { border: 1px solid var(--hair); border-radius: 999px; padding: 6px 11px; font: inherit; font-size: 13px; font-weight: 600; background: var(--glass-soft); color: var(--ink); cursor: pointer; transition: all .2s; }
+.filter span { color: var(--muted); font-weight: 500; margin-left: 3px; }
+.filter.on { background: var(--glass-strong); border-color: var(--edge); box-shadow: 0 2px 10px rgba(0,0,0,.08), inset 0 1px 0 var(--edge); }
+.found { font-size: 13px; color: var(--muted); margin: 0 8px 8px; flex: 0 0 auto; }
+.found:empty { display: none; }
+nav.toc { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 2px 14px 0; overscroll-behavior: contain; }
+.toc ul, .toc ol { list-style: none; margin: 0; padding: 0; }
+.toc-group { margin-bottom: 12px; }
+.toc-group-name { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--muted); margin: 0 0 3px 10px; }
+.toc a { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 12px; text-decoration: none; font-size: 14px; line-height: 1.35; border: 1px solid transparent; transition: background .2s, border-color .2s; }
+.toc-group a { align-items: flex-start; }
+.toc a:hover { background: var(--glass-soft); }
+.toc a.active { background: var(--glass-strong); border-color: var(--edge); box-shadow: 0 2px 10px rgba(0,0,0,.06), inset 0 1px 0 var(--edge); color: var(--c); font-weight: 600; }
+.toc-num { flex: 0 0 20px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; font-weight: 500; }
+.toc a.active .toc-num { color: var(--c); }
+.toc-title { flex: 1; }
+.toc-count { font-size: 12px; color: var(--muted); }
+.toc .hidden { display: none; }
+.toc-toggle { display: none; }
+
+/* section banners */
+.group-banner { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 34px 0 14px; padding: 24px 28px; border-radius: var(--r-l); }
+.group-banner::after { content: ""; position: absolute; right: -40px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: var(--c); opacity: .14; filter: blur(30px); pointer-events: none; }
+main > .group-banner:first-child, .cat:first-child .group-banner { margin-top: 0; }
+.cat .group-banner { margin-top: 0; margin-bottom: 12px; }
+.gb-kicker { font-size: 12px; font-weight: 600; color: var(--c); text-transform: uppercase; letter-spacing: .08em; }
+.gb-title { margin: 2px 0 6px; font-size: clamp(22px, 2.8vw, 30px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; }
+.gb-meta { font-size: 14px; color: var(--muted); }
+.gb-orb {
+  position: relative; z-index: 1; flex: 0 0 auto; min-width: 72px; height: 72px; padding: 0 14px; border-radius: 999px; display: grid; place-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.25)); border: 1px solid var(--edge);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -8px 16px var(--tint-2), 0 8px 24px rgba(0,0,0,.08);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+:root[data-theme="dark"] .gb-orb { background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); box-shadow: inset 0 1px 1px rgba(255,255,255,.25), inset 0 -8px 16px var(--tint-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .gb-orb { background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); box-shadow: inset 0 1px 1px rgba(255,255,255,.25), inset 0 -8px 16px var(--tint-2); } }
+.gb-orb span { font-size: 22px; font-weight: 700; color: var(--c); letter-spacing: -.02em; }
+
+/* grammar topics */
+.topic { border-radius: var(--r-l); padding: 26px 28px 24px; margin-bottom: 12px; }
+.topic h3 { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font-size: 22px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; }
+.num {
+  flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  color: var(--c); font-size: 16px; font-weight: 700;
+  background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.35)); border: 1px solid var(--edge);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -6px 12px var(--tint-2), 0 4px 12px rgba(0,0,0,.06);
+}
+:root[data-theme="dark"] .num { background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.04)); box-shadow: inset 0 1px 1px rgba(255,255,255,.25), inset 0 -6px 12px var(--tint-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .num { background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.04)); box-shadow: inset 0 1px 1px rgba(255,255,255,.25), inset 0 -6px 12px var(--tint-2); } }
+.body p { margin: 0 0 12px; }
+.body > ul:not(.examples), .body > ol { margin: 0 0 14px; padding: 4px 0; list-style: none; counter-reset: n; border-radius: var(--r-m); background: var(--glass-soft); border: 1px solid var(--hair); }
+.body > ul:not(.examples) > li, .body > ol > li { position: relative; padding: 9px 16px 9px 38px; margin: 0; border-bottom: 1px solid var(--hair); }
+.body > ul:not(.examples) > li:last-child, .body > ol > li:last-child { border-bottom: 0; }
+.body > ul:not(.examples) > li::before { content: ""; position: absolute; left: 18px; top: 18px; width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+.body > ol > li { counter-increment: n; }
+.body > ol > li::before { content: counter(n); position: absolute; left: 13px; top: 10px; width: 18px; height: 18px; border-radius: 50%; background: var(--tint-2); color: var(--c); font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+.body strong { font-weight: 600; background: var(--tint); padding: 1px 7px; border-radius: 7px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.ex-label { display: inline-block; margin: 16px 0 8px !important; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
+ul.examples { list-style: none; margin: 0; padding: 4px 0; border-radius: var(--r-m); background: var(--glass-strong); border: 1px solid var(--edge); box-shadow: inset 0 1px 0 var(--edge); }
+ul.examples li { position: relative; padding: 9px 16px 9px 42px; margin: 0; border-bottom: 1px solid var(--hair); }
+ul.examples li:last-child { border-bottom: 0; }
+ul.examples li::before { content: "EN"; position: absolute; left: 14px; top: 12px; font-size: 9px; font-weight: 700; color: var(--c); background: var(--tint); padding: 1px 4px; border-radius: 4px; }
+.table-wrap { overflow-x: auto; margin: 14px 0 6px; border-radius: var(--r-m); background: var(--glass-strong); border: 1px solid var(--edge); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 10px 16px; vertical-align: top; border-bottom: 1px solid var(--hair); }
+th { font-weight: 600; font-size: 12px; color: var(--c); text-transform: uppercase; letter-spacing: .05em; background: var(--tint); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+
+/* dictionary */
+.cat { margin-bottom: 30px; }
+.words { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-radius: var(--r-l); padding: 6px; }
+.word { padding: 13px 16px; border-radius: 16px; line-height: 1.45; transition: background .2s; }
+.word:hover { background: var(--glass-soft); }
+.w-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 3px; }
+.en { font-weight: 600; font-size: 16.5px; line-height: 1.3; letter-spacing: -.01em; }
+.ru { color: var(--muted); font-size: 14.5px; }
+.tag { flex: 0 0 auto; font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; margin-top: 2px; }
+.tag-note { color: var(--ink); background: var(--glass-strong); border: 1px solid var(--edge); }
+.tag-board { color: var(--c); background: var(--tint); }
+.tag-level { color: var(--muted); border: 1px solid var(--hair); }
+.word.hidden, .cat.hidden, .topic.hidden, .group-banner.hidden { display: none; }
+.empty { display: none; text-align: center; padding: 60px 20px; color: var(--muted); border-radius: var(--r-l); background: var(--glass); border: 1px solid var(--edge); }
+mark { background: rgba(255, 214, 10, .45); color: inherit; border-radius: 4px; padding: 0 2px; }
+
+.to-top {
+  position: fixed; right: 20px; bottom: 20px; width: 48px; height: 48px; border-radius: 50%; font-size: 19px; font-weight: 600; color: var(--ink); cursor: pointer;
+  background: var(--glass-strong); border: 1px solid var(--edge); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
+  box-shadow: var(--shadow), inset 0 1px 0 var(--edge); opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.to-top.show { opacity: 1; pointer-events: auto; }
+
+@media (max-width: 920px) {
+  .page { padding: 10px 10px 64px; }
+  .hero { padding: 26px 20px 20px; border-radius: 28px; }
+  .tabs { display: flex; width: 100%; }
+  .tab { flex: 1; justify-content: center; padding: 9px 10px; }
+  .chip { padding: 7px 12px; font-size: 14px; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 12px; }
+  aside { position: static; max-height: none; margin-bottom: 12px; padding: 10px; border-radius: 22px; }
+  .aside-title { display: none; }
+  .toc-toggle { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--hair); background: var(--glass-soft); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+  nav.toc { display: none; margin-top: 10px; }
+  aside.open nav.toc { display: block; }
+  .group-banner { padding: 18px 18px; margin-top: 22px; border-radius: 22px; }
+  .gb-orb { min-width: 56px; height: 56px; }
+  .gb-orb span { font-size: 17px; }
+  .topic { padding: 18px 14px; border-radius: 22px; }
+  .topic h3 { font-size: 19px; gap: 11px; }
+  .num { width: 34px; height: 34px; font-size: 14px; }
+  .words { grid-template-columns: minmax(0, 1fr); border-radius: 22px; }
+  ul.examples li { padding: 9px 12px 9px 38px; }
+  ul.examples li::before { left: 10px; }
+}
+@media print {
+  .backdrop, aside, .to-top, .glass, .tabs, .theme-btn { display: none !important; }
+  body { background: #fff; }
+  .view { display: block !important; }
+  .layout { display: block; margin: 0; } .page { padding: 0; max-width: none; }
+  .hero, .group-banner, .topic, .words { background: #fff; box-shadow: none; border: 1px solid #ddd; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .topic, .word { break-inside: avoid-page; }
+  .view-dict { break-before: page; }
+}
+</style>
+</head>
+<body data-view="grammar">
+<div class="backdrop" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
+<div class="page">
+  <header class="hero">
+    <div class="hero-top"><button class="theme-btn" id="themeBtn" type="button" aria-label="Сменить тему"><span class="ti-light">☀︎</span><span class="ti-dark">☾</span>Тема</button>
+      <div class="hero-badges"><span>✦ Speakout B1+</span><span>24 темы</span><span>297 слов</span></div></div>
+    <h1>Английский: пройденный материал</h1>
+    <p>Грамматика и слова с доски Holst «Natasha». Объяснения и примеры взяты с доски.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-view="grammar" role="tab">Грамматика<span class="tab-n">24</span></button>
+      <button class="tab" data-view="dict" role="tab">Словарь<span class="tab-n">297</span></button>
+    </div>
+    <div class="glass glass-grammar">
+<a class="chip" data-g="0" href="#g0"><span class="dot"></span>Времена<span class="chip-n">6</span></a>
+<a class="chip" data-g="1" href="#g1"><span class="dot"></span>Привычки<span class="chip-n">3</span></a>
+<a class="chip" data-g="2" href="#g2"><span class="dot"></span>Пассив<span class="chip-n">1</span></a>
+<a class="chip" data-g="3" href="#g3"><span class="dot"></span>Условные предложения<span class="chip-n">4</span></a>
+<a class="chip" data-g="4" href="#g4"><span class="dot"></span>Модальные глаголы<span class="chip-n">3</span></a>
+<a class="chip" data-g="5" href="#g5"><span class="dot"></span>Другие конструкции<span class="chip-n">7</span></a>
+    </div>
+    <div class="glass glass-dict">
+<a class="chip" data-g="0" href="#c0"><span class="dot"></span>Сериалы, кино и музыка<span class="chip-n">39</span></a>
+<a class="chip" data-g="1" href="#c1"><span class="dot"></span>Привычки, сон и повседневная жизнь<span class="chip-n">37</span></a>
+<a class="chip" data-g="2" href="#c2"><span class="dot"></span>Характер, эмоции и отношения<span class="chip-n">60</span></a>
+<a class="chip" data-g="3" href="#c3"><span class="dot"></span>Раздражение, критика и конфликты<span class="chip-n">22</span></a>
+<a class="chip" data-g="4" href="#c4"><span class="dot"></span>Работа, учёба и продуктивность<span class="chip-n">41</span></a>
+<a class="chip" data-g="5" href="#c5"><span class="dot"></span>Деньги, покупки и вещи<span class="chip-n">32</span></a>
+<a class="chip" data-g="6" href="#c6"><span class="dot"></span>Обман, новости и общество<span class="chip-n">33</span></a>
+<a class="chip" data-g="7" href="#c7"><span class="dot"></span>Связки и разговорные выражения<span class="chip-n">33</span></a>
+    </div>
+  </header>
+
+  <div class="view view-grammar">
+    <div class="layout">
+      <aside>
+        <p class="aside-title">Оглавление</p>
+        <div class="panel">
+          <input class="search" type="search" placeholder="Найти тему или слово…" aria-label="Поиск по темам">
+          <p class="found"></p>
+          <button class="toc-toggle" aria-expanded="false">Оглавление <span aria-hidden="true">▾</span></button>
+          <nav class="toc"><ul>
+<li class="toc-group" data-g="0"><span class="toc-group-name"><span class="dot"></span>Времена</span><ol>
+<li><a href="#t1"><span class="toc-num">1</span><span class="toc-title">Past Simple</span></a></li>
+<li><a href="#t2"><span class="toc-num">2</span><span class="toc-title">Past Continuous</span></a></li>
+<li><a href="#t3"><span class="toc-num">3</span><span class="toc-title">Past Perfect</span></a></li>
+<li><a href="#t4"><span class="toc-num">4</span><span class="toc-title">Present Perfect</span></a></li>
+<li><a href="#t5"><span class="toc-num">5</span><span class="toc-title">Present Perfect Continuous</span></a></li>
+<li><a href="#t6"><span class="toc-num">6</span><span class="toc-title">Future in the past: past plans and intentions</span></a></li>
+</ol></li>
+<li class="toc-group" data-g="1"><span class="toc-group-name"><span class="dot"></span>Привычки</span><ol>
+<li><a href="#t7"><span class="toc-num">7</span><span class="toc-title">Used to и would: привычки в прошлом</span></a></li>
+<li><a href="#t8"><span class="toc-num">8</span><span class="toc-title">Be used to и get used to</span></a></li>
+<li><a href="#t9"><span class="toc-num">9</span><span class="toc-title">Present и Past Continuous для раздражающих привычек</span></a></li>
+</ol></li>
+<li class="toc-group" data-g="2"><span class="toc-group-name"><span class="dot"></span>Пассив</span><ol>
+<li><a href="#t10"><span class="toc-num">10</span><span class="toc-title">Passive voice</span></a></li>
+</ol></li>
+<li class="toc-group" data-g="3"><span class="toc-group-name"><span class="dot"></span>Условные предложения</span><ol>
+<li><a href="#t11"><span class="toc-num">11</span><span class="toc-title">Zero и First Conditional</span></a></li>
+<li><a href="#t12"><span class="toc-num">12</span><span class="toc-title">Unless, even if, in case</span></a></li>
+<li><a href="#t13"><span class="toc-num">13</span><span class="toc-title">Second Conditional</span></a></li>
+<li><a href="#t14"><span class="toc-num">14</span><span class="toc-title">Third и Mixed Conditional</span></a></li>
+</ol></li>
+<li class="toc-group" data-g="4"><span class="toc-group-name"><span class="dot"></span>Модальные глаголы</span><ol>
+<li><a href="#t15"><span class="toc-num">15</span><span class="toc-title">Модальные глаголы обязанности и разрешения</span></a></li>
+<li><a href="#t16"><span class="toc-num">16</span><span class="toc-title">Should have и could have: прошлые сожаления</span></a></li>
+<li><a href="#t17"><span class="toc-num">17</span><span class="toc-title">Must have и might have: предположения о прошлом</span></a></li>
+</ol></li>
+<li class="toc-group" data-g="5"><span class="toc-group-name"><span class="dot"></span>Другие конструкции</span><ol>
+<li><a href="#t18"><span class="toc-num">18</span><span class="toc-title">Comparatives и superlatives</span></a></li>
+<li><a href="#t19"><span class="toc-num">19</span><span class="toc-title">Clauses of purpose</span></a></li>
+<li><a href="#t20"><span class="toc-num">20</span><span class="toc-title">Verb patterns: gerund и infinitive</span></a></li>
+<li><a href="#t21"><span class="toc-num">21</span><span class="toc-title">Причина и следствие: due to, lead to, cause</span></a></li>
+<li><a href="#t22"><span class="toc-num">22</span><span class="toc-title">Would rather и would prefer</span></a></li>
+<li><a href="#t23"><span class="toc-num">23</span><span class="toc-title">There + be</span></a></li>
+<li><a href="#t24"><span class="toc-num">24</span><span class="toc-title">Avoiding repetition: so, not, be (7D)</span></a></li>
+</ol></li>
+          </ul></nav>
+        </div>
+      </aside>
+      <main>
+<div class="group-banner" data-g="0" id="g0"><div class="gb-text"><span class="gb-kicker">Раздел 1</span><h2 class="gb-title">Времена</h2><span class="gb-meta">6 тем · 1–6</span></div><div class="gb-orb" aria-hidden="true"><span>1–6</span></div></div>
+<section class="topic" data-g="0" id="t1"><h3><span class="num">1</span><span class="title">Past Simple</span></h3><div class="body"><p>Основные события в прошлом, которые идут одно за другим (в рассказе — главная линия истории). Форма: утверждение — subject + V2 (past verb), отрицание — didn't + базовая форма, вопрос — Did + subject + базовая форма. Для to be — was / were. Отличие от used to: Past Simple — сделал один раз.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I traveled through Italy with a group from university. My friends persuaded me to go.</li>
+<li>I went to circus — I did it once.</li>
+<li>Yesterday she bought a new jacket.</li>
+<li>She pulled out a carrot from the ground. She realised it was the ring…</li>
+</ul></div></section>
+<section class="topic" data-g="0" id="t2"><h3><span class="num">2</span><span class="title">Past Continuous</span></h3><div class="body"><p>Форма: was / were + V-ing (I was working / I wasn't working / Was I working?). Используется:</p>
+<ul>
+<li>для действия в процессе в конкретный момент прошлого;</li>
+<li>для фона в истории;</li>
+<li>для двух действий, которые шли одновременно;</li>
+<li>для действия, которое прервали другим действием (Past Continuous + Past Simple).</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I was watching TV at 8 p.m.</li>
+<li>It was raining while we were walking. She was reading while he was cooking.</li>
+<li>I was sleeping when the phone rang.</li>
+<li>I was walking along the beach when I realised that…</li>
+<li>I was riding the subway. I was halfway to work when…</li>
+<li>While I was listening to…, the audience was singing along. The people around were dancing.</li>
+<li>While we were watching the film, we heard a song that reminded me of my childhood.</li>
+<li>They were performing live at the festival when the lights went out.</li>
+</ul></div></section>
+<section class="topic" data-g="0" id="t3"><h3><span class="num">3</span><span class="title">Past Perfect</span></h3><div class="body"><p>Форма: had + V3. Действие, которое произошло раньше другого действия в прошлом (Grammar bank 1A narrative tenses).</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>When I got to the top floor, I realised I had left my phone in the car.</li>
+<li>When we arrived at the station, the train had already left.</li>
+<li>I fainted because I had drunk too much.</li>
+<li>She realised it was the ring she had lost last year.</li>
+<li>The band had already played their biggest hit when we arrived.</li>
+<li>I have never seen a cockroach. Before that I had never seen a cockroach in a flat.</li>
+</ul></div></section>
+<section class="topic" data-g="0" id="t4"><h3><span class="num">4</span><span class="title">Present Perfect</span></h3><div class="body"><p>Форма: have / has + V3 (I have seen that movie / I haven't seen that movie / Have you seen that movie?). Используется:</p>
+<ol>
+<li>для действий в неуказанное время в прошлом (точное время не называется);</li>
+<li>для действий, которые начались в прошлом и продолжаются сейчас;</li>
+<li>с выражениями времени ever, never, already, yet, just, since, for, recently;</li>
+<li>для действий, у которых есть результат в настоящем;</li>
+<li>для жизненного опыта и достижений.</li>
+</ol>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I have visited Paris. She has lived in this city for five years.</li>
+<li>They have never been to Australia. I have just finished my work.</li>
+<li>He has broken his arm, so he can't play football today.</li>
+<li>I have read that book before. I have never been to a concert like that before.</li>
+<li>Yulia hasn't given birth yet. I haven't been to the gym yet. We haven't bought a present for Yulia yet.</li>
+<li>Have you done your homework yet? Have you called your mum yet? Have you had a class with Katya yet?</li>
+<li>Have you ever been to Fethiye?</li>
+<li>I haven't listened to their songs for a long time.</li>
+</ul></div></section>
+<section class="topic" data-g="0" id="t5"><h3><span class="num">5</span><span class="title">Present Perfect Continuous</span></h3><div class="body"><p>Форма: have / has been + V-ing. На доске — для действия, которое длится до сих пор, вместе с for + период.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I've been listening to them for 5 years.</li>
+<li>They have been running this hotel for 30 years.</li>
+<li>We've been working together for a year.</li>
+</ul></div></section>
+<section class="topic" data-g="0" id="t6"><h3><span class="num">6</span><span class="title">Future in the past: past plans and intentions</span></h3><div class="body"><p>Когда мы рассказываем о планах и ожиданиях в прошлом, будущее «сдвигается» назад: I think I will cry (Present + Future) → I thought I would cry (Past Simple + Future in the past). Справочник 4A:</p>
+<ul>
+<li><strong>was / were going to</strong> — запланированное действие, которое не произошло. Отрицание — wasn't / weren't going to.</li>
+<li><strong>planned to, hoped to</strong> — похожее значение, в Past Simple или Past Continuous. Отрицание — wasn't planning to.</li>
+<li><strong>was expecting to, was waiting to</strong> — другие глаголы в Past Continuous для прошлых намерений.</li>
+<li><strong>meant to</strong> — план, который не случился, чаще в Past Simple.</li>
+<li><strong>didn't mean to</strong> — когда кто-то сделал что-то случайно.</li>
+<li><strong>intended to</strong> — более формально, чем meant to или hoped to; используется и чтобы назвать причину действия. Отрицание — didn't intend.</li>
+<li><strong>thought it would be</strong> — причина запланированного действия в прошлом.</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I was going to call you, but I was too busy. They were going to visit the museum, but it was closed.</li>
+<li>I planned to visit last week, but I couldn't in the end. I was hoping to meet your father, but he wasn't there.</li>
+<li>I wasn't planning to go anywhere this summer.</li>
+<li>I was expecting to go to Turkey that year.</li>
+<li>I meant to introduce you to Xavier, but he left early. Sorry — I crashed the car! I didn't mean to!</li>
+<li>The doctor intended to see me last week, but he had to cancel. He bought the ring because he intended to ask her to marry him.</li>
+<li>I brought you because I thought it would be nice if you met my parents.</li>
+<li>They planned to become rappers. They hadn't intended to lie for so long. They weren't expecting to become global superstars.</li>
+</ul></div></section>
+<div class="group-banner" data-g="1" id="g1"><div class="gb-text"><span class="gb-kicker">Раздел 2</span><h2 class="gb-title">Привычки</h2><span class="gb-meta">3 темы · 7–9</span></div><div class="gb-orb" aria-hidden="true"><span>7–9</span></div></div>
+<section class="topic" data-g="1" id="t7"><h3><span class="num">7</span><span class="title">Used to и would: привычки в прошлом</span></h3><div class="body"><p><strong>Used to</strong> — привычки и состояния в прошлом, которых больше нет (in the past, no longer true). Форма: I used to smoke / Did you use to smoke? / I didn't use to smoke. Отличие от Past Simple: Past Simple — сделал один раз, used to — делал много раз.</p>
+<p><strong>Would</strong> — тоже для повторяющихся действий в прошлом. Нельзя использовать would со stative verbs (be, have, know, like, love, hate, think) и с вредными привычками, которые бросили: там только used to.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I went to circus (did it once). I used to go to circus (did it many times).</li>
+<li>I was fat → I used to be fat. I worked in this company → I used to work in this company.</li>
+<li>I smoked (not clear) → I used to smoke (broke this bad habit).</li>
+<li>I used to stay up late when I was at school. I would / I'd go to bed at 2 or 3 am.</li>
+<li>When I was a child, we used to spend every summer at my grandparents' house.</li>
+<li>It's not as common as it used to be. There used to be fewer places.</li>
+</ul></div></section>
+<section class="topic" data-g="1" id="t8"><h3><span class="num">8</span><span class="title">Be used to и get used to</span></h3><div class="body"><p><strong>Be used to</strong> — состояние: уже привык, это нормально.</p>
+<p><strong>Get used to</strong> — процесс: привыкать (недавно привык или ещё привыкаю).</p>
+<p>После обеих конструкций идёт существительное или gerund (verb + ing).</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I'm used to it — normal, I've lived here for 10 years.</li>
+<li>People from Paris are used to the beauty of the city.</li>
+<li>We are not used to the climate, the food.</li>
+<li>I'm getting used to waking up early. I got used to it — recently. You'll get used to it!</li>
+<li>I'd never get used to working at nights.</li>
+<li>As soon as you get used to your anxiety level, you have to get used to even bigger projects.</li>
+<li>It was hard to get used to waking up early. I haven't got used to sitting at home and not working yet.</li>
+</ul></div></section>
+<section class="topic" data-g="1" id="t9"><h3><span class="num">9</span><span class="title">Present и Past Continuous для раздражающих привычек</span></h3><div class="body"><p>Справочник 2C That's annoying!: Present и Past Continuous с always, constantly, continually, forever используют для привычки, которая нас раздражает. Иногда эта же структура показывает положительную эмоцию. Фразы раздражения (I can't stand it, It really annoys me, It gets on my nerves, It drives me crazy) можно продолжить when + clause, а также relative clause или -ing.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>You're always losing your phone! My dad's forever complaining about noise.</li>
+<li>Our car was continually breaking down.</li>
+<li>Children at this age are so cute. They're constantly laughing!</li>
+<li>In my block the guy next door is continually singing along with his favourite songs.</li>
+<li>This light above my desk drives me mad. It's constantly buzzing.</li>
+<li>It drives me crazy when… It gets on my nerves when people use their phone right next to me.</li>
+<li>Children that misbehave in restaurants really bug me. I can't stand people shortening my name.</li>
+<li>It drove me crazy. I couldn't stand it. It kept happening.</li>
+<li>It doesn't bother me at all. I don't mind it.</li>
+</ul></div></section>
+<div class="group-banner" data-g="2" id="g2"><div class="gb-text"><span class="gb-kicker">Раздел 3</span><h2 class="gb-title">Пассив</h2><span class="gb-meta">1 тема · 10</span></div><div class="gb-orb" aria-hidden="true"><span>10</span></div></div>
+<section class="topic" data-g="2" id="t10"><h3><span class="num">10</span><span class="title">Passive voice</span></h3><div class="body"><p>Форма пассива: be + V3. Меняется только be, в зависимости от времени. Справочник 7B:</p>
+<ul>
+<li>пассив используют, чтобы сфокусироваться на человеке или предмете, на которого направлено действие, а не на том, кто его совершает;</li>
+<li>когда исполнитель очевиден, неизвестен или не важен;</li>
+<li>если важно, кто совершил действие, его называют с by;</li>
+<li>в более формальных ситуациях: в научных и академических текстах, в новостях;</li>
+<li>с just, yet, still, already в Present Perfect passive (обратите внимание на место наречия);</li>
+<li>get + V3 — неформально, когда случилось что-то драматичное или неожиданное, часто негативное.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Время</th>
+<th>Форма</th>
+<th>Пример с доски</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Present Simple</td>
+<td>am / is / are + V3</td>
+<td>Dopamine is released into our brains.</td>
+</tr>
+<tr>
+<td>Present Continuous</td>
+<td>am / is / are + being + V3</td>
+<td>We are being followed. More series are being made.</td>
+</tr>
+<tr>
+<td>Past Simple</td>
+<td>was / were + V3</td>
+<td>TV viewing was controlled by TV channels.</td>
+</tr>
+<tr>
+<td>Present Perfect</td>
+<td>have / has been + V3</td>
+<td>Binge watching has been criticised by doctors.</td>
+</tr>
+<tr>
+<td>Past Perfect</td>
+<td>had been + V3</td>
+<td>All better rooms had already been booked.</td>
+</tr>
+<tr>
+<td>Future Simple</td>
+<td>will be + V3</td>
+<td>will be chosen</td>
+</tr>
+<tr>
+<td>Be going to</td>
+<td>am / is / are going to be + V3</td>
+<td>am going to be chosen</td>
+</tr>
+<tr>
+<td>Модальные глаголы</td>
+<td>can / should / must / might + be + V3</td>
+<td>It should be done. It must be done.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="ex-label">Другие примеры</p>
+<ul class="examples">
+<li>The app has been downloaded over a million times.</li>
+<li>Jude was arrested at the festival last week. The museum was built in the 1980s. The winner will be announced tomorrow.</li>
+<li>The play was written by Shakespeare in 1609.</li>
+<li>My train has just been cancelled. The report has already been signed, but it hasn't been sent yet. I still haven't been paid for last month's work.</li>
+<li>I got stopped by the police last night! One of my lights wasn't working.</li>
+<li>The show was criticized for being too rushed and confusing. It shouldn't have been canceled.</li>
+<li>The finale was spoiled on social media. Fans were disappointed by the last season.</li>
+<li>I was told to be polite and never ruin surprises for others.</li>
+<li>Isabella's photo has already been posted 5,000 times online.</li>
+<li>I've just been tagged in a photo. My phone got damaged recently. I'm being sent a lot of spam at the moment.</li>
+<li>She found out that her photo had been used.</li>
+</ul></div></section>
+<div class="group-banner" data-g="3" id="g3"><div class="gb-text"><span class="gb-kicker">Раздел 4</span><h2 class="gb-title">Условные предложения</h2><span class="gb-meta">4 темы · 11–14</span></div><div class="gb-orb" aria-hidden="true"><span>11–14</span></div></div>
+<section class="topic" data-g="3" id="t11"><h3><span class="num">11</span><span class="title">Zero и First Conditional</span></h3><div class="body"><p><strong>Zero Conditional</strong> — то, что всегда правда: условие → результат.</p>
+<p><strong>First Conditional</strong> — реальное условие и возможный результат в будущем: if + Present Simple, will + глагол.</p>
+<p>Вместо if может быть when (когда это точно случится). What if + Present Simple — «а что если…?».</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>If it's 0 degrees, water freezes.</li>
+<li>If I don't sleep well, I usually feel terrible.</li>
+<li>If I have time, I'll call you. If I don't have money, I'll borrow it from you.</li>
+<li>If I have one English lesson instead of two, it will affect my level.</li>
+<li>When I get home, I'll call you. When I become a millionaire, I won't call you.</li>
+<li>What if you don't like it?</li>
+</ul></div></section>
+<section class="topic" data-g="3" id="t12"><h3><span class="num">12</span><span class="title">Unless, even if, in case</span></h3><div class="body"><p><strong>Unless</strong> + Present Simple = if not: условие, без которого что-то не произойдёт.</p>
+<p><strong>Even if</strong> — даже если.</p>
+<p><strong>In case</strong> + clause — на случай, если.</p>
+<p><strong>In case of</strong> + noun — в случае чего-то.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I'm not gonna stop learning English unless they fire me.</li>
+<li>Unless it rains, we'll go for a walk. Unless we leave now, we'll miss the bus.</li>
+<li>Unless you save money, you won't be able to travel.</li>
+<li>You won't learn anything unless you pay attention in class.</li>
+<li>Unless you invite her, Akira won't come.</li>
+<li>Even if you study 7 languages, it won't affect your English level.</li>
+<li>Alex will help me even if he doesn't want to. I'll travel alone even if I feel lonelier that way.</li>
+<li>Take a jumper with you in case it gets cold. You should leave now in case you miss the bus.</li>
+<li>I'll definitely study the local language first in case no one speaks English.</li>
+<li>Call this number in case of emergency. I'm going to take a first aid kit in case of accidents.</li>
+</ul></div></section>
+<section class="topic" data-g="3" id="t13"><h3><span class="num">13</span><span class="title">Second Conditional</span></h3><div class="body"><p>Гипотетическое настоящее и будущее: if + Past Simple, would + infinitive (в результате могут быть также could, might). Разбирали на моральных дилеммах (скачивание книг без оплаты) и гипотетических вопросах.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>If I were a dragon, I would burn some villages.</li>
+<li>If I were in a bookshop, I wouldn't steal a book. If I saw a book, I would steal it.</li>
+<li>I'd try to download it for free if I really needed to read it.</li>
+<li>If it was in the library, you could get it for free anyway.</li>
+<li>If it was available and I really needed to read it, I might download it as an e-book.</li>
+<li>If you could be any fictional character, who would you be and why?</li>
+<li>What would you do if you could solve any unsolved mystery?</li>
+<li>It would be nice if… Wouldn't it be scary if…?</li>
+</ul></div></section>
+<section class="topic" data-g="3" id="t14"><h3><span class="num">14</span><span class="title">Third и Mixed Conditional</span></h3><div class="body"><p><strong>Third Conditional</strong> — гипотетическое прошлое, то, чего не случилось: if + Past Perfect (had + V3), would have + V3.</p>
+<p><strong>Mixed Conditional</strong> — условие в прошлом, результат в настоящем: if + Past Perfect, would + глагол.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>If I had money, I'd buy a new car — present / future. If I had had money, I would've bought a car — in the past.</li>
+<li>If I had heard about it 5 years ago, I wouldn't have believed it.</li>
+<li>If I had prepared, I would have answered better.</li>
+<li>If the atmosphere had been more fun, you would have liked it more.</li>
+<li>If I had watched a ton of documentaries, I would be very smart (mixed). I would've become… (third).</li>
+</ul></div></section>
+<div class="group-banner" data-g="4" id="g4"><div class="gb-text"><span class="gb-kicker">Раздел 5</span><h2 class="gb-title">Модальные глаголы</h2><span class="gb-meta">3 темы · 15–17</span></div><div class="gb-orb" aria-hidden="true"><span>15–17</span></div></div>
+<section class="topic" data-g="4" id="t15"><h3><span class="num">15</span><span class="title">Модальные глаголы обязанности и разрешения</span></h3><div class="body"><p>Разбирали на темах правил в офисе, дресс-кода и вакансий.</p>
+<ul>
+<li><strong>Must</strong> — сильная обязанность, часто внутренняя (от самого говорящего), используется как эмоциональная рекомендация. В разговорной речи must встречается редко.</li>
+<li><strong>Have to</strong> — обязанность извне: от начальника, правил, расписания. Разговорный вариант — I've got to = gotta go.</li>
+<li><strong>Be supposed to</strong> — ожидание, неформальное требование, которое не всегда строго соблюдается.</li>
+<li><strong>Should</strong> — совет, рекомендация.</li>
+<li><strong>Can't = mustn't = be not allowed</strong> — запрет.</li>
+<li><strong>Don't have to</strong> — нет необходимости.</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I must be on time for work. I have to be on time for work. I'm supposed to be on time for work.</li>
+<li>You must not enter the lab without safety goggles.</li>
+<li>You are not permitted to use a smartphone, though you are allowed to use a dictionary.</li>
+<li>It's necessary to register if you want to borrow a book. It's essential to use a seatbelt at all times.</li>
+<li>You've got to show your passport or a national identity card.</li>
+<li>You're supposed to stay to the right except when passing.</li>
+<li>You are supposed to scare visitors. You are not supposed to actually bite anyone. You don't have to memorize many lines.</li>
+<li>We aren't supposed to fly.</li>
+</ul></div></section>
+<section class="topic" data-g="4" id="t16"><h3><span class="num">16</span><span class="title">Should have и could have: прошлые сожаления</span></h3><div class="body"><p>Modal + have + V3 для прошлого.</p>
+<ul>
+<li><strong>Should have / shouldn't have + V3</strong> — разочарование, сожаление, критика: «надо было, стоило».</li>
+<li><strong>Could have + V3</strong> — возможность в прошлом, которой не воспользовались: «мог бы».</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>You should've talked more about your hard skills. I should've prepared for the interview.</li>
+<li>I could've prepared better. You could've lied about croissants.</li>
+<li>Could've answered — могла бы ответить. Should've answered — надо было бы ответить.</li>
+<li>Could've started from this. Why did I have to explain…?</li>
+<li>The show shouldn't have been canceled.</li>
+</ul></div></section>
+<section class="topic" data-g="4" id="t17"><h3><span class="num">17</span><span class="title">Must have и might have: предположения о прошлом</span></h3><div class="body"><p>Modal + have + V3 для предположений. На доске эта тема была только в примерах.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>You've probably seen it. You must have seen it. You might have seen it.</li>
+</ul></div></section>
+<div class="group-banner" data-g="5" id="g5"><div class="gb-text"><span class="gb-kicker">Раздел 6</span><h2 class="gb-title">Другие конструкции</h2><span class="gb-meta">7 тем · 18–24</span></div><div class="gb-orb" aria-hidden="true"><span>18–24</span></div></div>
+<section class="topic" data-g="5" id="t18"><h3><span class="num">18</span><span class="title">Comparatives и superlatives</span></h3><div class="body"><ul>
+<li><strong>Comparatives</strong> — для сравнения существительных и наречий, в том числе с глаголами чувств (seems quieter).</li>
+<li><strong>(not) as + adjective / adverb + as</strong> — такой же / не такой, как.</li>
+<li><strong>Quantifiers</strong> a bit, a little, slightly, much, a lot — с прилагательными и наречиями: slightly more expensive.</li>
+<li><strong>Superlatives</strong> — для сравнения с группой: the least expensive, the furthest. С by far, much — для усиления.</li>
+<li><strong>Emphasising</strong>: повтор сравнительной степени (more and more dangerous, faster and faster), than ever (better than ever), ever с превосходной степенью.</li>
+<li><strong>Parallel comparatives</strong>: the + comparative, the + comparative.</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>The more you practise, the better you become.</li>
+<li>The bigger the project, the more responsibilities I have.</li>
+<li>The higher you are, the more responsibilities you have.</li>
+<li>The more I work, the more I understand.</li>
+<li>We've had more forest fires this year than ever before.</li>
+</ul></div></section>
+<section class="topic" data-g="5" id="t19"><h3><span class="num">19</span><span class="title">Clauses of purpose</span></h3><div class="body"><p>Справочник clauses of purpose:</p>
+<ul>
+<li><strong>to + infinitive, in order to + infinitive</strong> — чтобы назвать цель действия.</li>
+<li><strong>so as to + infinitive</strong> — то же, но более формально. Подлежащее главного предложения и придаточного цели одно и то же.</li>
+<li><strong>so that / in order that + subject + verb</strong> — когда подлежащие одинаковые или разные. Если подлежащие разные, используют только so that или in order that, НЕ in order to, to или so as to.</li>
+<li><strong>Отрицание</strong>: not ставят перед to — in order not to, so as not to. Просто not to возможно, но обычно только для контраста. После so that и in order that — обычное отрицание.</li>
+<li><strong>Порядок</strong>: придаточное цели обычно идёт после главного, но может стоять первым — тогда после него ставят запятую.</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I'm going downstairs to lock up. I often turn off my phone in order to avoid distractions.</li>
+<li>The police put up barriers so as to stop people entering the building.</li>
+<li>I'd like to move closer to the stage so that I can hear better.</li>
+<li>The school is changing the exam date in order that students have more time to prepare.</li>
+<li>He set his alarm for 7 a.m. in order not to oversleep. I check my 'to do' list every day so as not to forget anything.</li>
+<li>I eat a lot of vegetables, not to lose weight but to improve my health.</li>
+<li>Let's check this very carefully so that we don't make a mistake.</li>
+<li>The company gave us our money back in order that we wouldn't post a negative review.</li>
+<li>In order to buy a car, I had to save up for a year.</li>
+<li>I am learning English to / in order to get into a university.</li>
+<li>She decided to have a baby so that her child can teach her some memes. Natasha is learning memes so her colleagues laugh at her jokes.</li>
+</ul></div></section>
+<section class="topic" data-g="5" id="t20"><h3><span class="num">20</span><span class="title">Verb patterns: gerund и infinitive</span></h3><div class="body"><p>Справочник 1B verb patterns: иногда два глагола идут вместе (They hope to learn Spanish. I like playing ball games). Второй глагол стоит в форме -ing:</p>
+<ul>
+<li><strong>после предлога</strong> (кроме to), если первый глагол требует предлога: think about doing, succeed in finding, believe in telling, concentrate on passing, dream about playing, apologise for getting, struggle with working, care about saving;</li>
+<li><strong>после phrasal verb</strong>: carry on driving, look forward to reading, give up studying, put off making, end up carrying;</li>
+<li><strong>после некоторых глаголов</strong>: stop buying, keep telling, can't resist doing, like / hate doing, spend time doing, start doing.</li>
+</ul>
+<p>У try и stop значение меняется:</p>
+<ul>
+<li><strong>try + -ing</strong> — сделать что-то как эксперимент, чтобы проверить, поможет ли; предложить решение.</li>
+<li><strong>try + to</strong> — приложить усилие. В прошедшем времени обычно о неудачной попытке.</li>
+<li><strong>stop + to infinitive</strong> — прервать одно действие, чтобы сделать другое.</li>
+<li><strong>stop + -ing</strong> — закончить или бросить действие совсем.</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>You should think about doing that course. I finally succeeded in finding a job.</li>
+<li>She apologised for getting angry. He struggles with working at night.</li>
+<li>We carried on driving for another hour. I look forward to reading your new book! We put off making that decision.</li>
+<li>If you can't sleep, try drinking some warm milk. Have you tried restarting your computer?</li>
+<li>I tried to open the door, but it was locked.</li>
+<li>We stopped to have lunch. He stopped smoking last year. Please stop talking.</li>
+<li>She couldn't stop buying new things because she loved following fashion trends.</li>
+<li>Have you tried …ing? I've stopped …ing. I can't resist …ing. I don't feel like …ing.</li>
+</ul></div></section>
+<section class="topic" data-g="5" id="t21"><h3><span class="num">21</span><span class="title">Причина и следствие: due to, lead to, cause</span></h3><div class="body"><p><strong>Due to + noun</strong> — из-за чего-то.</p>
+<p><strong>Due to the fact that + clause</strong> — из-за того, что.</p>
+<p><strong>It can lead to</strong>, <strong>it can cause</strong> — для следствия.</p>
+<p><strong>Despite the fact that</strong> — для уступки.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>Due to that situation…</li>
+<li>Due to the fact that you don't do homework, you are not progressing.</li>
+<li>Why are we so hooked on social media? Due to the fact that it's enjoyable.</li>
+<li>Watching can lead to… It encourages lack of activity. It can cause psychological problems.</li>
+</ul></div></section>
+<section class="topic" data-g="5" id="t22"><h3><span class="num">22</span><span class="title">Would rather и would prefer</span></h3><div class="body"><p>Конструкции для выбора и предпочтений.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>Would you rather have tea or coffee?</li>
+<li>I'd definitely prefer to look at the options before deciding.</li>
+<li>Would you prefer to be rich or famous?</li>
+<li>I'd rather send her a message than phone her.</li>
+</ul></div></section>
+<section class="topic" data-g="5" id="t23"><h3><span class="num">23</span><span class="title">There + be</span></h3><div class="body"><p><strong>There + be + noun</strong> — о существовании чего-то.</p>
+<p><strong>It + be + adjective</strong> — описание.</p>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>There should be… There must be…</li>
+<li>There will be a storm. There will be an earthquake.</li>
+<li>It will be rainy.</li>
+</ul></div></section>
+<section class="topic" data-g="5" id="t24"><h3><span class="num">24</span><span class="title">Avoiding repetition: so, not, be (7D)</span></h3><div class="body"><p>Справочник 7D: чтобы не повторять сказанное, используют другое слово вместо глагола или фразы.</p>
+<ul>
+<li><strong>Вспомогательные глаголы</strong> do, does, did заменяют глагол в Present или Past Simple.</li>
+<li><strong>so и not</strong>: think so, hope so, tell someone so — для положительного ответа. Также suppose so и guess so, когда соглашаемся, но не очень хотим. Для отрицания — hope not, suppose not, guess not. С think чаще говорят don't think so.</li>
+<li><strong>to</strong>: want to, would like to, try to заменяют глагол.</li>
+<li><strong>be</strong>: с be говорят want to be, would like to be, try to be.</li>
+<li><strong>Отрицания</strong>: don't want to, try not to, don't want to be, try not to be. Wouldn't like to (be) встречается реже.</li>
+</ul>
+<p class="ex-label">Примеры</p>
+<ul class="examples">
+<li>I think you know John? — Yes, I do. Susan thinks Ben doesn't like jazz, but he does. I didn't see John, but Mary did.</li>
+<li>Are you going to the party? — I think so. And is Elena going? — I hope so.</li>
+<li>Can I borrow your phone? — I suppose so, but I'll need it back in half an hour.</li>
+<li>Has Angus gone home? — I hope not. We're not going to catch the plane. — I guess not.</li>
+<li>Did Elena finish the video? — I don't think so.</li>
+<li>Would you like to go out for a meal tonight? — Yes, I'd love to. My parents expected me to go to college, but I didn't want to.</li>
+<li>Do you want to be a professional actor? — I'd like to be, but it's not easy.</li>
+<li>Don't work too hard. — I'll try not to. Shall we invite Terry? — I don't really want to, but I suppose we must.</li>
+<li>Sometimes you're too strict. — OK, in future I'll try not to be.</li>
+</ul></div></section>
+        <div class="empty">Ничего не найдено.</div>
+      </main>
+    </div>
+  </div>
+
+  <div class="view view-dict">
+    <div class="layout">
+      <aside>
+        <p class="aside-title">Разделы словаря</p>
+        <div class="panel">
+          <input class="search" type="search" placeholder="Найти слово или перевод…" aria-label="Поиск по словарю">
+          <div class="filters">
+            <button class="filter on" data-f="all">Все</button>
+            <button class="filter" data-f="n">Заметка<span>20</span></button>
+            <button class="filter" data-f="t">С доски<span>86</span></button>
+            <button class="filter" data-f="B2">B2<span>123</span></button>
+            <button class="filter" data-f="C1">C1+<span>68</span></button>
+          </div>
+          <p class="found"></p>
+          <button class="toc-toggle" aria-expanded="false">Разделы <span aria-hidden="true">▾</span></button>
+          <nav class="toc"><ul>
+<li data-g="0"><a href="#c0"><span class="dot"></span><span class="toc-title">Сериалы, кино и музыка</span><span class="toc-count">39</span></a></li>
+<li data-g="1"><a href="#c1"><span class="dot"></span><span class="toc-title">Привычки, сон и повседневная жизнь</span><span class="toc-count">37</span></a></li>
+<li data-g="2"><a href="#c2"><span class="dot"></span><span class="toc-title">Характер, эмоции и отношения</span><span class="toc-count">60</span></a></li>
+<li data-g="3"><a href="#c3"><span class="dot"></span><span class="toc-title">Раздражение, критика и конфликты</span><span class="toc-count">22</span></a></li>
+<li data-g="4"><a href="#c4"><span class="dot"></span><span class="toc-title">Работа, учёба и продуктивность</span><span class="toc-count">41</span></a></li>
+<li data-g="5"><a href="#c5"><span class="dot"></span><span class="toc-title">Деньги, покупки и вещи</span><span class="toc-count">32</span></a></li>
+<li data-g="6"><a href="#c6"><span class="dot"></span><span class="toc-title">Обман, новости и общество</span><span class="toc-count">33</span></a></li>
+<li data-g="7"><a href="#c7"><span class="dot"></span><span class="toc-title">Связки и разговорные выражения</span><span class="toc-count">33</span></a></li>
+          </ul></nav>
+        </div>
+      </aside>
+      <main>
+<section class="cat" data-g="0" id="c0"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 1</span><h2 class="gb-title">Сериалы, кино и музыка</h2><span class="gb-meta">39 слов</span></div><div class="gb-orb" aria-hidden="true"><span>39</span></div></div><div class="words"><div class="word" data-tag="B2"><div class="w-top"><span class="en">binge-watch</span></div><div class="ru">смотреть сериал запоем, много серий подряд</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">many episodes in a row / in one sitting</span></div><div class="ru">много серий подряд, за один присест</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">lead to</span></div><div class="ru">может привести к</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">encourage lack of activity</span></div><div class="ru">способствует отсутствию активности</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">the third season came out</span></div><div class="ru">вышел третий сезон</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">build suspense</span></div><div class="ru">нагнетать напряжение</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">suspense</span></div><div class="ru">напряжение</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">it&#x27;s easy to follow</span></div><div class="ru">легко воспринимается, легко понять</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">plot</span></div><div class="ru">сюжет</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">viewer</span></div><div class="ru">зритель</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">the audience</span></div><div class="ru">зрители</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">slow-paced / fast-paced</span></div><div class="ru">медленный / быстрый по темпу</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">season finale /fɪˈnɑː.li/</span></div><div class="ru">финал сезона</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">hate-watch</span></div><div class="ru">смотреть, чтобы поругать</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">benefits of binge-watching</span></div><div class="ru">плюсы, выгоды</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">cause psychological problems</span></div><div class="ru">вызывать психологические проблемы</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">emotional roller-coaster</span></div><div class="ru">эмоциональные американские горки</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">mood swings</span></div><div class="ru">перепады настроения</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">get cancelled</span></div><div class="ru">его отменили</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">goes downhill</span></div><div class="ru">становится хуже</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">big reveal</span></div><div class="ru">главное раскрытие</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">build-up</span></div><div class="ru">интрига, нагнетание</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">live up to fans&#x27; expectations</span></div><div class="ru">оправдать ожидания фанатов</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">twist ending</span></div><div class="ru">неожиданная развязка</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">spoil the finale</span></div><div class="ru">заспойлерить финал</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">die-hard fan</span></div><div class="ru">преданный фанат</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">earworm</span></div><div class="ru">навязчивая мелодия, песня, которая застряла в голове</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">it lives in my head rent-free</span></div><div class="ru">никак не выходит из головы</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">this music takes me back</span></div><div class="ru">эта музыка возвращает меня в прошлое</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">that was a bummer</span></div><div class="ru">это был облом</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">that&#x27;s a rip-off</span></div><div class="ru">это грабёж, обдираловка</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">had a blast</span></div><div class="ru">отлично провели время</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">lyrics</span></div><div class="ru">текст песни</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">sing along</span></div><div class="ru">подпевать</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">my go-to song</span></div><div class="ru">моя любимая песня, на все случаи</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">orchestra / choir /kwaɪə/</span></div><div class="ru">оркестр / хор</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">based on true events</span></div><div class="ru">основано на реальных событиях</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">biased</span></div><div class="ru">предвзятый, однобокий</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">manipulative</span></div><div class="ru">манипулятивный</div></div></div></section>
+<section class="cat" data-g="1" id="c1"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 2</span><h2 class="gb-title">Привычки, сон и повседневная жизнь</h2><span class="gb-meta">37 слов</span></div><div class="gb-orb" aria-hidden="true"><span>37</span></div></div><div class="words"><div class="word" data-tag="t"><div class="w-top"><span class="en">get used to</span></div><div class="ru">привыкнуть</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">be used to</span></div><div class="ru">быть привыкшим</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">me neither</span></div><div class="ru">я тоже нет</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">nightmare</span></div><div class="ru">кошмар</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">vague / vividly</span></div><div class="ru">смутный / ярко, отчётливо</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">insomnia</span></div><div class="ru">бессонница</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">increase the risk of</span></div><div class="ru">повышать риск</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">my anxiety doesn&#x27;t let me sleep</span></div><div class="ru">тревога не даёт мне уснуть</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">miss out on (smth)</span></div><div class="ru">что-то упускать</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">student dorm</span></div><div class="ru">общежитие</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">small things pile up</span></div><div class="ru">мелочи накапливаются</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">rural area</span></div><div class="ru">сельская местность</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">flexible schedule / work different shifts</span></div><div class="ru">гибкий график / работать в разные смены</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">give up smoking</span></div><div class="ru">бросить курить</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">withdrawal symptoms</span></div><div class="ru">синдром отмены, ломка</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">break a habit</span></div><div class="ru">избавиться от привычки</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">get rid of</span></div><div class="ru">избавиться от</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">addiction</span></div><div class="ru">зависимость</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">hoarding</span></div><div class="ru">патологическое накопительство</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">gambling / a gambler</span></div><div class="ru">азартные игры / игрок</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">make bets / chase losses</span></div><div class="ru">делать ставки / отыгрываться</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">be hungover</span></div><div class="ru">быть с похмелья</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">put off</span></div><div class="ru">откладывать</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">keep on</span></div><div class="ru">продолжать</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">can&#x27;t resist</span></div><div class="ru">не могу устоять</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">take up</span></div><div class="ru">заняться чем-то новым</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">stick to</span></div><div class="ru">придерживаться, продолжать</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">manage</span></div><div class="ru">справиться</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">make an effort</span></div><div class="ru">приложить усилие</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">have a green thumb</span></div><div class="ru">уметь выращивать растения</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">I&#x27;m not getting any younger</span></div><div class="ru">я не молодею</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">live your life to the fullest</span></div><div class="ru">жить на полную</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it&#x27;s a torture</span></div><div class="ru">это пытка</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">spread myself too thin</span></div><div class="ru">браться за слишком многое сразу</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">kill two birds with one stone</span></div><div class="ru">убить двух зайцев одним выстрелом</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it&#x27;s a win-win</span></div><div class="ru">выигрыш для обеих сторон</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">burden</span></div><div class="ru">ноша, бремя</div></div></div></section>
+<section class="cat" data-g="2" id="c2"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 3</span><h2 class="gb-title">Характер, эмоции и отношения</h2><span class="gb-meta">60 слов</span></div><div class="gb-orb" aria-hidden="true"><span>60</span></div></div><div class="words"><div class="word" data-tag="n"><div class="w-top"><span class="en">I can&#x27;t put myself in their shoes</span></div><div class="ru">я не могу поставить себя на их место</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">it&#x27;s a double-edged sword</span></div><div class="ru">это палка о двух концах</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">a reasonable person</span></div><div class="ru">здравомыслящий человек</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">it&#x27;s a win!</span></div><div class="ru">это победа!</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">people-pleaser</span></div><div class="ru">человек, который старается всем угодить</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">put up with</span></div><div class="ru">смириться, потерпеть</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">put other people&#x27;s needs first</span></div><div class="ru">ставить чужие потребности на первое место</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">take advantage of</span></div><div class="ru">пользоваться, злоупотреблять</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">take smb for granted</span></div><div class="ru">воспринимать как должное</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">set your own boundaries</span></div><div class="ru">устанавливать личные границы</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">doormat</span></div><div class="ru">тряпка</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">wimp</span></div><div class="ru">слабак</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">stand your ground</span></div><div class="ru">стоять на своём</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">put yourself first</span></div><div class="ru">ставить себя на первое место</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">make peace with</span></div><div class="ru">смириться</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">vulnerable</span></div><div class="ru">уязвимый</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">superficial</span></div><div class="ru">поверхностный</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">no strings attached</span></div><div class="ru">без обязательств</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">feel left out</span></div><div class="ru">чувствовать себя лишним</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">you don&#x27;t belong here</span></div><div class="ru">тебе здесь не место</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">show off / brag</span></div><div class="ru">хвастаться</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">humblebrag</span></div><div class="ru">хвастаться под видом скромности</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">humble = modest</span></div><div class="ru">скромный</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">downplay her problems</span></div><div class="ru">преуменьшать её проблемы</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">exaggeration</span></div><div class="ru">преувеличение</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">traitor</span></div><div class="ru">предатель</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">hypocrite / hypocrisy / hypocritical</span></div><div class="ru">лицемер / лицемерие / лицемерный</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">lose my temper</span></div><div class="ru">выхожу из себя</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">persistent</span></div><div class="ru">настойчивая</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">determined</span></div><div class="ru">полна решимости</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">throw tantrums</span></div><div class="ru">устраивает истерики</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">have a short fuse</span></div><div class="ru">быть вспыльчивым</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">grumpy</span></div><div class="ru">ворчливый</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">mediocre / mid</span></div><div class="ru">посредственный</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">sophisticated</span></div><div class="ru">утончённый, сложный</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">dismissive</span></div><div class="ru">пренебрежительный</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">lack self-awareness</span></div><div class="ru">не осознавать себя, своих недостатков</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">take accountability for</span></div><div class="ru">брать ответственность за</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">it&#x27;s justified</span></div><div class="ru">оправдано</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">deep down / deep inside</span></div><div class="ru">в глубине души</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">I can relate</span></div><div class="ru">мне это знакомо</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">on purpose = intentionally</span></div><div class="ru">нарочно, намеренно</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">click with smb</span></div><div class="ru">сразу найти общий язык</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">have a beef with smb</span></div><div class="ru">быть в контрах с кем-то</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">be on good terms with</span></div><div class="ru">быть в хороших отношениях</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">get along with</span></div><div class="ru">ладить</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">walk on eggshells</span></div><div class="ru">ходить на цыпочках, бояться задеть</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">hurt smb&#x27;s feelings</span></div><div class="ru">задеть чьи-то чувства</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">break up / dump</span></div><div class="ru">расстаться / бросить</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">sibling rivalry</span></div><div class="ru">соперничество между братьями и сёстрами</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">sympathize with</span></div><div class="ru">сочувствовать</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">fragile ego</span></div><div class="ru">хрупкое эго</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">gluttony</span></div><div class="ru">обжорство</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">greed</span></div><div class="ru">жадность</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">pride</span></div><div class="ru">гордыня</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">wrath</span></div><div class="ru">ярость</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">envy</span></div><div class="ru">зависть</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">lust</span></div><div class="ru">похоть</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">sloth</span></div><div class="ru">лень</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">vengeful / revengeful</span></div><div class="ru">мстительный</div></div></div></section>
+<section class="cat" data-g="3" id="c3"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 4</span><h2 class="gb-title">Раздражение, критика и конфликты</h2><span class="gb-meta">22 слова</span></div><div class="gb-orb" aria-hidden="true"><span>22</span></div></div><div class="words"><div class="word" data-tag="C1"><div class="w-top"><span class="en">pet peeve</span></div><div class="ru">то, что особенно раздражает</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it drives me crazy</span></div><div class="ru">это сводит меня с ума</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it gets on my nerves</span></div><div class="ru">это действует мне на нервы</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it bugs me</span></div><div class="ru">это меня бесит</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">I can&#x27;t tolerate it</span></div><div class="ru">я этого не выношу</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">rant</span></div><div class="ru">гневная тирада</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">lame excuse</span></div><div class="ru">жалкая отговорка</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">unacceptable</span></div><div class="ru">неприемлемо</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it was the last straw</span></div><div class="ru">это была последняя капля</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">it was a dealbreaker for me</span></div><div class="ru">для меня это стало решающим «нет»</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">cut me some slack</span></div><div class="ru">будь ко мне снисходительнее</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">snap at</span></div><div class="ru">накричать, огрызнуться</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">insult</span></div><div class="ru">оскорблять; оскорбление (ударение: inSULT / INsult)</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">call smb out on</span></div><div class="ru">призывать к ответу за</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">get off your high horse</span></div><div class="ru">перестань строить из себя</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">virtue signaling</span></div><div class="ru">показная добродетель</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">be lectured / be scolded</span></div><div class="ru">выслушивать нотации / получить выговор</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">undermine smb&#x27;s confidence</span></div><div class="ru">подрывать чью-то уверенность</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">get a taste of your own medicine</span></div><div class="ru">получить по заслугам, тем же способом</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">shoulda woulda coulda</span></div><div class="ru">что было бы, если бы… (сожаление задним числом)</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">I won&#x27;t deny it</span></div><div class="ru">не буду отрицать</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">missed opportunity</span></div><div class="ru">упущенная возможность</div></div></div></section>
+<section class="cat" data-g="4" id="c4"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 5</span><h2 class="gb-title">Работа, учёба и продуктивность</h2><span class="gb-meta">41 слово</span></div><div class="gb-orb" aria-hidden="true"><span>41</span></div></div><div class="words"><div class="word" data-tag="C1"><div class="w-top"><span class="en">side hustle</span></div><div class="ru">подработка, дополнительный доход</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">gig work</span></div><div class="ru">разовая работа, фриланс</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">temporary / permanent contract</span></div><div class="ru">временный / постоянный договор</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">employment benefits</span></div><div class="ru">соцпакет</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">health insurance / sick leave</span></div><div class="ru">медстраховка / больничный</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">be on (sick) leave</span></div><div class="ru">быть на больничном</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">maternity / paternity leave</span></div><div class="ru">декрет</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">resign / quit / leave</span></div><div class="ru">уволиться</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">hand in your notice</span></div><div class="ru">подать заявление об уходе</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">be fired / be let go</span></div><div class="ru">быть уволенным</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">get written up</span></div><div class="ru">получить выговор (письменный)</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">it&#x27;s above my pay grade</span></div><div class="ru">это не моего уровня решение</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">slacker / slack off</span></div><div class="ru">лентяй / отлынивать</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">underpaid / understaffed</span></div><div class="ru">низкооплачиваемый / с нехваткой персонала</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">the right fit</span></div><div class="ru">подходящий кандидат</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">beneficial / profitable</span></div><div class="ru">полезный / прибыльный</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">highlight</span></div><div class="ru">подчеркнуть, выделить</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">assess / assessment</span></div><div class="ru">оценивать / оценка</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">evaluate</span></div><div class="ru">оценить</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">areas of improvement / growth points</span></div><div class="ru">зоны роста</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">stick and carrot approach</span></div><div class="ru">метод кнута и пряника</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">it&#x27;s a game-changer</span></div><div class="ru">это меняет правила игры</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">the best of both worlds</span></div><div class="ru">лучшее из двух вариантов</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">make a deal</span></div><div class="ru">заключить сделку</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">come to an agreement</span></div><div class="ru">прийти к соглашению</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">fall behind schedule</span></div><div class="ru">отставать от графика</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">meet a deadline</span></div><div class="ru">уложиться в срок</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">get difficult tasks out of the way</span></div><div class="ru">разобраться с трудными задачами</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">get a lot done</span></div><div class="ru">многое успевать</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">avoid distractions</span></div><div class="ru">избегать отвлекающих факторов</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">keep to a routine</span></div><div class="ru">соблюдать распорядок</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">break down a task</span></div><div class="ru">разбить задачу на части</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">get sidetracked</span></div><div class="ru">отвлечься от темы</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">dumb it down</span></div><div class="ru">объяснить попроще</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">elaborate on</span></div><div class="ru">подробнее рассказать о</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">cause inconvenience</span></div><div class="ru">доставлять неудобства</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">encourage</span></div><div class="ru">воодушевить</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">praise</span></div><div class="ru">хвалить</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">review</span></div><div class="ru">повторять</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">commute / commuter</span></div><div class="ru">ездить на работу / тот, кто ездит на работу</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">substitute teacher</span></div><div class="ru">замещающий учитель</div></div></div></section>
+<section class="cat" data-g="5" id="c5"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 6</span><h2 class="gb-title">Деньги, покупки и вещи</h2><span class="gb-meta">32 слова</span></div><div class="gb-orb" aria-hidden="true"><span>32</span></div></div><div class="words"><div class="word" data-tag="B2"><div class="w-top"><span class="en">possessions</span></div><div class="ru">имущество, вещи</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">get attached to things</span></div><div class="ru">привязываться к вещам</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">memorabilia / keepsakes</span></div><div class="ru">памятные вещи</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">family relic / inherited</span></div><div class="ru">семейная реликвия / унаследованный</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">genuine /ˈdʒenjuɪn/</span></div><div class="ru">подлинный</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">worn out</span></div><div class="ru">износились</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">came back in style</span></div><div class="ru">снова вошло в моду</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">ancestors</span></div><div class="ru">предки</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">durable</span></div><div class="ru">долговечный</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">inheritance</span></div><div class="ru">наследство</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">less is more</span></div><div class="ru">меньше значит лучше</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">clutter / declutter</span></div><div class="ru">хлам / расхламлять</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">disposable / reusable</span></div><div class="ru">одноразовый / многоразовый</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">consumerism</span></div><div class="ru">общество потребления</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">value for money</span></div><div class="ru">соотношение цены и качества</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it was a bargain / it&#x27;s a steal</span></div><div class="ru">это была выгодная покупка / даром отдают</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">refund / fare / donation</span></div><div class="ru">возврат денег / плата за проезд / пожертвование</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">the offer is limited</span></div><div class="ru">предложение ограничено</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">marketing tricks</span></div><div class="ru">маркетинговые уловки</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">trick smb into buying</span></div><div class="ru">обманом заставить купить</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">entitled</span></div><div class="ru">считающий, что ему все должны</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">sign me up!</span></div><div class="ru">запиши меня</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">I&#x27;m sold</span></div><div class="ru">вы меня убедили</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">gym membership</span></div><div class="ru">абонемент в спортзал</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">get a mortgage / get a loan</span></div><div class="ru">взять ипотеку / кредит</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">pay in installments</span></div><div class="ru">платить в рассрочку</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">pay off debts</span></div><div class="ru">выплатить долги</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">savings</span></div><div class="ru">сбережения</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">afford</span></div><div class="ru">позволить себе</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">stocks</span></div><div class="ru">акции</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">lavish</span></div><div class="ru">роскошный</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">potluck</span></div><div class="ru">вечеринка, где каждый приносит блюдо</div></div></div></section>
+<section class="cat" data-g="6" id="c6"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 7</span><h2 class="gb-title">Обман, новости и общество</h2><span class="gb-meta">33 слова</span></div><div class="gb-orb" aria-hidden="true"><span>33</span></div></div><div class="words"><div class="word" data-tag="t"><div class="w-top"><span class="en">deceive</span></div><div class="ru">обманывать</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">doubt</span></div><div class="ru">сомневаться</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">come clean</span></div><div class="ru">признаться во всём</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">live a lie</span></div><div class="ru">жить во лжи</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">fall for</span></div><div class="ru">повестись</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">get away with it</span></div><div class="ru">остаться безнаказанной</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">pull it off</span></div><div class="ru">провернуть</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">to convince</span></div><div class="ru">убедить</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">pretend</span></div><div class="ru">притворяться</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">make up</span></div><div class="ru">выдумать</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">scheme</span></div><div class="ru">схема, махинация</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">hoax</span></div><div class="ru">розыгрыш, мистификация</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">scam / scammer / fraudster</span></div><div class="ru">мошенничество / мошенник</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">fraud scheme</span></div><div class="ru">мошенническая схема</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">commit a crime</span></div><div class="ru">совершить преступление</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">freed of all charges</span></div><div class="ru">сняли все обвинения</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">go viral</span></div><div class="ru">стать вирусным</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">backlash</span></div><div class="ru">волна критики</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">conspiracy theory</span></div><div class="ru">теория заговора</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">under the influence / make an impact on</span></div><div class="ru">под влиянием / повлиять на</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">woke agenda</span></div><div class="ru">повестка</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">it&#x27;s rigged</span></div><div class="ru">всё куплено</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">take over the power</span></div><div class="ru">захватить власть</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">go down the rabbit hole</span></div><div class="ru">залипнуть, уйти с головой</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">mind your own business</span></div><div class="ru">заниматься своими делами</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">get rusty</span></div><div class="ru">потерять навык</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">apparently</span></div><div class="ru">судя по всему</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">dog-eat-dog world</span></div><div class="ru">жестокий, беспощадный мир</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">sweatshop</span></div><div class="ru">потогонное производство</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">slaughterhouse</span></div><div class="ru">скотобойня</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">cut out</span></div><div class="ru">исключать</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">beliefs</span></div><div class="ru">убеждения</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">judge by</span></div><div class="ru">судить по</div></div></div></section>
+<section class="cat" data-g="7" id="c7"><div class="group-banner"><div class="gb-text"><span class="gb-kicker">Раздел 8</span><h2 class="gb-title">Связки и разговорные выражения</h2><span class="gb-meta">33 слова</span></div><div class="gb-orb" aria-hidden="true"><span>33</span></div></div><div class="words"><div class="word" data-tag="n"><div class="w-top"><span class="en">due to + noun</span></div><div class="ru">по причине</div></div><div class="word" data-tag="n"><div class="w-top"><span class="en">due to the fact that</span></div><div class="ru">из-за того, что</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">in the end</span></div><div class="ru">в конце концов</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">from what he says</span></div><div class="ru">судя по тому, что он говорит</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">all in all</span></div><div class="ru">в целом</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">the only thing is that…</span></div><div class="ru">единственное…</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">it all comes down to…</span></div><div class="ru">всё сводится к…</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">long story short</span></div><div class="ru">короче говоря</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">taking everything into account</span></div><div class="ru">учитывая всё</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">according to</span></div><div class="ru">согласно, по словам</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">end up</span></div><div class="ru">в итоге, в результате, оказалось</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">despite the fact that</span></div><div class="ru">несмотря на то что</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">give or take</span></div><div class="ru">плюс-минус</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">Go figure!</span></div><div class="ru">вот и думай</div></div><div class="word" data-tag="t"><div class="w-top"><span class="en">Who am I kidding?</span></div><div class="ru">кого я обманываю?</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">I bet</span></div><div class="ru">я уверена</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">thanks for the heads-up</span></div><div class="ru">спасибо, что предупредил</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">to break the ice</span></div><div class="ru">растопить лёд</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">be engaged in the conversation</span></div><div class="ru">быть вовлечённым в разговор</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">party animal / homebody</span></div><div class="ru">тусовщик / домосед</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">not to brag, but…</span></div><div class="ru">не хвастаюсь, но…</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">suit yourself</span></div><div class="ru">как хочешь, дело твоё</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">the time will tell</span></div><div class="ru">время покажет</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">the tables have turned</span></div><div class="ru">всё поменялось местами</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">pick your poison</span></div><div class="ru">выбирай меньшее из зол</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it was meant to be</span></div><div class="ru">так было суждено</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">eat away at my conscience</span></div><div class="ru">грызёт совесть</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">scratch that</span></div><div class="ru">забудь, что я сказала</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">first come, first served</span></div><div class="ru">кто первый пришёл, того и обслужили</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">it&#x27;s inevitable</span></div><div class="ru">это неизбежно</div></div><div class="word" data-tag="C1"><div class="w-top"><span class="en">fulfilling</span></div><div class="ru">приносящий удовлетворение</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">a farewell party / a send-off party</span></div><div class="ru">прощальная вечеринка</div></div><div class="word" data-tag="B2"><div class="w-top"><span class="en">aka (also known as)</span></div><div class="ru">также известный как</div></div></div></section>
+        <div class="empty">Ничего не найдено. Попробуйте другое слово или сбросьте фильтр.</div>
+      </main>
+    </div>
+  </div>
+</div>
+<button class="to-top" id="toTop" aria-label="Наверх">↑</button>
+
+<script>
+(function () {
+  var root = document.documentElement, body = document.body;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var th = store('theme'); if (th) root.setAttribute('data-theme', th);
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); store('theme', next);
+  });
+
+  // tabs
+  var tabs = document.querySelectorAll('.tab');
+  function setView(v, scroll) {
+    body.setAttribute('data-view', v);
+    tabs.forEach(function (t) { var on = t.getAttribute('data-view') === v; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
+    store('view', v);
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { setView(t.getAttribute('data-view')); }); });
+  var h = location.hash.slice(1), startEl = h && document.getElementById(h);
+  if (startEl) setView(startEl.closest('.view-dict') ? 'dict' : 'grammar');
+  else setView(store('view') === 'dict' ? 'dict' : 'grammar');
+
+  function esc(s) { return s.replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+  function hl(text, q) {
+    if (!q) return esc(text);
+    var i = text.toLowerCase().indexOf(q); if (i < 0) return esc(text);
+    return esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>' + esc(text.slice(i + q.length));
+  }
+
+  document.querySelectorAll('.view').forEach(function (view) {
+    var aside = view.querySelector('aside'), toggle = view.querySelector('.toc-toggle');
+    var nav = view.querySelector('nav.toc'), search = view.querySelector('.search'), found = view.querySelector('.found'), empty = view.querySelector('.empty');
+    toggle.addEventListener('click', function () { var o = aside.classList.toggle('open'); toggle.setAttribute('aria-expanded', o); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { aside.classList.remove('open'); toggle.setAttribute('aria-expanded', false); }); });
+
+    var isDict = view.classList.contains('view-dict');
+    if (isDict) {
+      var words = [].slice.call(view.querySelectorAll('.word')), filter = 'all';
+      words.forEach(function (w) { w._en = w.querySelector('.en').textContent; w._ru = w.querySelector('.ru').textContent; });
+      var apply = function () {
+        var q = search.value.trim().toLowerCase(), shown = 0;
+        words.forEach(function (w) {
+          var tag = w.getAttribute('data-tag');
+          var ok = (filter === 'all' || tag === filter || (filter === 'C1' && (tag === 'C1' || tag === 'C2'))) &&
+                   (!q || w._en.toLowerCase().indexOf(q) > -1 || w._ru.toLowerCase().indexOf(q) > -1);
+          w.classList.toggle('hidden', !ok);
+          w.querySelector('.en').innerHTML = hl(w._en, q);
+          w.querySelector('.ru').innerHTML = hl(w._ru, q);
+          if (ok) shown++;
+        });
+        view.querySelectorAll('.cat').forEach(function (c) {
+          var vis = c.querySelectorAll('.word:not(.hidden)').length;
+          c.classList.toggle('hidden', vis === 0);
+          var cnt = nav.querySelector('a[href="#' + c.id + '"] .toc-count'); if (cnt) cnt.textContent = vis;
+        });
+        empty.style.display = shown ? 'none' : 'block';
+        found.textContent = (q || filter !== 'all') ? 'Найдено: ' + shown : '';
+      };
+      search.addEventListener('input', apply);
+      view.querySelectorAll('.filter').forEach(function (b) {
+        b.addEventListener('click', function () {
+          view.querySelectorAll('.filter').forEach(function (x) { x.classList.remove('on'); });
+          b.classList.add('on'); filter = b.getAttribute('data-f'); apply();
+        });
+      });
+    } else {
+      search.addEventListener('input', function () {
+        var q = search.value.trim().toLowerCase(), shown = 0;
+        view.querySelectorAll('.toc-group').forEach(function (g) {
+          var vis = 0;
+          g.querySelectorAll('li').forEach(function (li) {
+            var sec = document.getElementById(li.querySelector('a').getAttribute('href').slice(1));
+            var hit = !q || sec.textContent.toLowerCase().indexOf(q) > -1;
+            li.classList.toggle('hidden', !hit); sec.classList.toggle('hidden', !hit);
+            if (hit) vis++;
+          });
+          g.classList.toggle('hidden', vis === 0);
+          var banner = document.getElementById('g' + g.getAttribute('data-g'));
+          if (banner) banner.classList.toggle('hidden', vis === 0);
+          shown += vis;
+        });
+        empty.style.display = shown ? 'none' : 'block';
+        found.textContent = q ? 'Найдено тем: ' + shown : '';
+      });
+    }
+
+    // active item
+    var links = {}; nav.querySelectorAll('a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var current;
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var l = links[e.target.id]; if (!l) return;
+        if (current) current.classList.remove('active');
+        current = l; current.classList.add('active');
+        if (innerWidth > 920) {
+          var r = current.getBoundingClientRect(), n = nav.getBoundingClientRect();
+          if (r.top < n.top || r.bottom > n.bottom) nav.scrollTop += r.top - n.top - n.height / 3;
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    view.querySelectorAll(isDict ? '.cat' : '.topic').forEach(function (s) { obs.observe(s); });
+  });
+
+  if (startEl) setTimeout(function () { startEl.scrollIntoView(); }, 50);
+
+  var toTop = document.getElementById('toTop');
+  addEventListener('scroll', function () { toTop.classList.toggle('show', scrollY > 600); }, { passive: true });
+  toTop.addEventListener('click', function () { scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+</script>
+</body>
+</html>
