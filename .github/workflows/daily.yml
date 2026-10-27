@@ -3,7 +3,7 @@ name: Ежедневное повторение
 on:
   schedule:
     - cron: "0 5 * * *"   # 05:00 UTC = 08:00 по Москве
-  workflow_dispatch:       # кнопка «Run workflow» для ручного запуска
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -22,6 +22,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Разложить файлы по папкам (сработает один раз)
+        run: |
+          git config user.name "english-bot"
+          git config user.email "english-bot@users.noreply.github.com"
+          if [ -f daily.py ]; then
+            mkdir -p bot/templates data docs/day
+            git mv bank.py daily.py find_chat_id.py bot/
+            git mv glass.css quiz.html bot/templates/
+            git mv konspekt.md words.txt data/
+            git mv index.html docs/
+            git rm -q --ignore-unmatch find-chat-id.yml download "download (1)"
+            touch docs/.nojekyll docs/day/.gitkeep
+            git add -A
+            git commit -m "Разложить файлы по папкам"
+          fi
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -32,11 +48,9 @@ jobs:
       - name: Собрать страницу дня
         run: python bot/daily.py --build
 
-      - name: Сохранить страницу в репозиторий
+      - name: Сохранить в репозиторий
         run: |
-          git config user.name "english-bot"
-          git config user.email "english-bot@users.noreply.github.com"
-          git add docs
+          git add -A
           git commit -m "Повторение $(TZ=Europe/Moscow date +%F)" || echo "Нет изменений"
           git push
 
