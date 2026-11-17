@@ -1,7 +1,7 @@
-"""Ежедневное повторение английского: страница-чек-лист + сообщение и квизы в Telegram.
+"""Ежедневное повторение английского: страница-чек-лист + сообщение в Telegram.
 
   python bot/daily.py --build            собрать страницу дня в docs/day/
-  python bot/daily.py --send             отправить сообщение и квизы в Telegram
+  python bot/daily.py --send             отправить сообщение в Telegram
   python bot/daily.py --build --dry-run --date 2026-11-02   проверить без отправки
 """
 import argparse, datetime as dt, html, json, os, random, re, sys, time
@@ -175,35 +175,18 @@ def tg_rule_text(body, limit=1400):
     return txt
 
 
-def cut(s, n):
-    return s if len(s) <= n else s[: n - 1] + "…"
-
-
 def telegram_payloads(p):
-    t, b = p["topic"], BANK[p["topic"]["num"]]
+    t = p["topic"]
     base = pages_url()
     link = f"{base}day/{p['n']:03d}.html"
     words = "\n".join(f"• {html.escape(x['en'], quote=False)} — {html.escape(x['ru'], quote=False)}" for x in p["words"])
     msg = (f"📚 <b>Повторение №{p['n']}</b> · {p['date'].strftime('%d.%m.%Y')}\n\n"
            f"<b>Тема {t['num']}. {html.escape(t['title'], quote=False)}</b>\n{tg_rule_text(t['body'])}\n\n"
            f"<b>Слова дня</b>\n{words}\n\n"
-           f"Ниже 8 коротких квизов. Полный чек-лист — по кнопке 👇")
-    out = [("sendMessage", dict(text=msg, parse_mode="HTML", disable_web_page_preview=True,
-                                reply_markup=dict(inline_keyboard=[[dict(text="✅ Открыть чек-лист", url=link)],
-                                                                  [dict(text="📖 Конспект и словарь", url=base)]])))]
-    rnd = random.Random(p["idx"] * 104729 + 3)
-    polls = [(f"Грамматика · {q}", opts, ans, ex) for q, opts, ans, ex in b["mcq"]]
-    w = p["words"]
-    for x in (w[10], w[11]):
-        m = mcq_word(x, p["all_words"], rnd, "en-ru")
-        polls.append(("Словарь · " + m["text"], m["options"], m["answer"], m["explain"]))
-    for x in (w[5], w[6]):
-        m = mcq_word(x, p["all_words"], rnd, "ru-en")
-        polls.append(("Словарь · " + m["text"], m["options"], m["answer"], m["explain"]))
-    for q, opts, ans, ex in polls:
-        out.append(("sendPoll", dict(question=cut(q, 300), options=[dict(text=cut(o, 100)) for o in opts],
-                                     type="quiz", correct_option_id=ans, is_anonymous=False, explanation=cut(ex, 200))))
-    return out
+           f"Все задания по теме и словам — в чек-листе по кнопке 👇")
+    return [("sendMessage", dict(text=msg, parse_mode="HTML", disable_web_page_preview=True,
+                                 reply_markup=dict(inline_keyboard=[[dict(text="✅ Открыть чек-лист", url=link)],
+                                                                   [dict(text="📖 Конспект и словарь", url=base)]])))]
 
 
 def send(payloads):
